@@ -19,7 +19,7 @@
    
    <section class="flex">
 
-      <a href="http://localhost:5000/home" class="logo">Educa.</a>
+      <a href="/home" class="logo">Educa.</a>
 
       <form action="search.html" method="post" class="search-form">
          <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
@@ -46,7 +46,7 @@
                     
             <% if (isTeacherAuthenticated) { %>
                <!-- If the user is authenticated, display logout button -->
-               <a href="http://localhost:5000/logout" class="option-btn">logout</a>
+               <a href="/logout" class="option-btn">logout</a>
            <% } else { %>
                <!-- If the user is not authenticated, display login and register buttons -->
                <div class="flex-btn">
