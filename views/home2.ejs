@@ -1,0 +1,39 @@
+<!-- home.ejs -->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title><%= title %></title>
+</head>
+<body>
+
+<% if (isAuthenticated) { %>
+
+    <% if (isTeacherAuthenticated) { %>
+        <h2>Welcome, Teacher!</h2>
+        <p>Name: <%= teacherData.name %></p>
+        <p>Email: <%= teacherData.email %></p>
+        <!-- Add other teacher-specific details as needed -->
+    <% } else { %>
+        <h2>Welcome, Student!</h2>
+        <p>Name: <%= studentData.name %></p>
+        <p>Email: <%= studentData.email %></p>
+        <!-- Add other student-specific details as needed -->
+    <% } %>
+
+    <!-- Common profile content for both students and teachers -->
+    <!-- Add additional content as needed -->
+
+<% } else { %>
+    <p>Welcome, Guest! 
+        <br>
+        <br>
+        Please log in to view your profile.</p>
+<% } %>
+<h1>Home page of the project</h1>
+
+</body>
+</html>
