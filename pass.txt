@@ -1,7 +1,1 @@
-cQoRjTw0JGRLsX67
-
-
-mongodb+srv://kushwahshivam065:cQoRjTw0JGRLsX67@cluster0.60hjjed.mongodb.net/?retryWrites=true&w=majority
-
-mongodb+srv://kushwahshivam065:<password>@cluster0.60hjjed.mongodb.net/
 
