@@ -1,3 +1,43 @@
+// controllers/courseController.js
+const Course = require('../models/course');
+
+// exports.showForm = (req, res) => {
+//   res.render('addCourseForm');
+// };
+
+exports.uploadFile = async (req, res) => {
+  try {
+    const { name } = req.body;
+    const file = req.file.path;
+
+    // Create a new course with data from the form
+    const newCourse = new Course({
+      name,
+      file,
+    });
+
+    // Save the course to the database
+    await newCourse.save();
+    res.redirect('/courses');
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+exports.getAllCourses = async (req, res) => {
+  try {
+    // Fetch all courses from the database
+    const courses = await Course.find({});
+    res.render('courses', { courses });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send('Internal Server Error');
+  }
+};
+
+
+
 module.exports.home = function(req,res){
   // Access the user information from the session
   const user = req.session.user
@@ -208,6 +248,30 @@ module.exports.teachers_profile = function(req,res){
     
 }
 
+module.exports.AddCourse = function(req,res){
+    // Access user information from the session
+    const user = req.session.user;
+    const teacher = req.session.teacher;
+
+    // check if the user is logged in
+    if(!teacher){
+
+        return res.redirect('/teachers/login');
+
+    }
+    // render to the teachers cursers page with user information
+    return res.render('add_course',{
+        title:"add course",
+        isAuthenticated: true,
+        isTeacherAuthenticated :true,
+   
+        // userName: user.name,
+        teacherName : teacher.name
+    });
+    
+}
+
+
 module.exports.courses = function (req, res) {
     // Access user information from the session
     const user = req.session.user;
@@ -311,6 +375,7 @@ module.exports.playlist = function (req, res) {
 // -----------------------------------------------------------------------------------------------------
   
    //  sign up data
+   
   
    module.exports.create =  async function(req,res){
     console.log('we are at Sign up');

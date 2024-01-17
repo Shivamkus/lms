@@ -1,9 +1,9 @@
-
 const mongoose = require('mongoose');
-
-
 const userSchema = new mongoose.Schema({
-
+    name:{
+        type:String,
+        required:true
+  },
     email:{
       type: String,
       required: true,
@@ -13,14 +13,10 @@ const userSchema = new mongoose.Schema({
         type:String,
         required:true
     },
-    name:{
+    roll:{
           type:String,
           required:true
     },
-    roll:{
-        type:String,
-        required:true
-  },
 },
     {
         timestamps:true
@@ -28,5 +24,5 @@ const userSchema = new mongoose.Schema({
 
 );
 
-const User =  mongoose.model('User',userSchema);
-module.exports = User;
+const User2 =  mongoose.model('User2',userSchema);
+module.exports = User2;

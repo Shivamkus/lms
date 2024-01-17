@@ -24,16 +24,20 @@ router.get('/contact',homeController.contact)
 router.get('/profile'  ,  homeController.profile);
 router.get('/register',homeController.Signup);
 router.get('/login',homeController.login);
-router.get('/courses',homeController.courses);
+router.get('/courses',homeController.courses || homeController.getAllCourses);
 router.get('/playlist',homeController.playlist);
 router.get('/teacher_profile',homeController.teachers_profile);
 router.get('/update',homeController.update);
 router.get('/watch-video',homeController.watch_video);
-
+router.get('/addCourse',homeController.AddCourse);
 router.post('/create',homeController.create);
+router.post('/addStudent',homeController.create)
 router.post('/create-session',homeController.createSession);
 router.post('/create-contact',homeController.createContact)
 router.post('/user_Update',homeController.updateuser);
+
+router.post('/addCourse',homeController.uploadFile);
+
 // router.get('/logout',homeController.logout);
 router.get('/logout', async function (req, res) {
     // Clear the user's session

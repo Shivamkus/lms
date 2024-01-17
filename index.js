@@ -10,6 +10,8 @@ const path = require('path');
 const db =require('./config/db');
 const SignUp = require('./models/user');
 const session = require('express-session');
+const multer = require('multer');
+
 
 
 app.use(session({
@@ -24,7 +26,7 @@ app.use(session({
 
 
 
-app.use(express.urlencoded());
+app.use(express.urlencoded({ extended: true }));
 app.use(express.static('./assets'));
 app.use(cookieParser());
 // app.use(expressLayout);
@@ -34,89 +36,44 @@ app.use('/',require('./routers'));
 app.set('view engine', 'ejs');
 app.set('views','./views');
 
-//----------------------------------------------------------------------------------------------------
 
-// app.use(passport.initialize());
-// app.use(passport.session())
 
-// app.use(passport.setAuthenticatedUser);
+const storage = multer.diskStorage({
+  destination : function(req , file, cb){
+      return cb(null, './assets/uploads');
+  },
+  filename : function(req,file, cb){
+      return cb(null, `${Date.now()}-${file.originalname}`);
+  }
+});
 
-//-----------------------------------------------------------------------------------------------------------+++++++++++++++++++++++++++++++++--------------------------------------
+const upload = multer({storage});
 
-// app.get('/',function(req,res){
-//     return res.render('home',{
-//         title:"home || Page"
-//     });
-// });
-// app.get('/home',function(req,res){
-//     return res.render('home',{
-//         title:"home || Page"
-//     });
-// });
 
-// app.get('/about',function(req,res){
-//     return res.render('about',{
-//         title:"About || Page"
-//     });
-// });
+app.use(express.urlencoded({extended: false}));
 
-// app.get('/contact',function(req,res){
-//     return res.render('contact',{
-//         title:"contact || Page"
-//     });
-// });
 
-// app.get('/courses',function(req,res){
-//     return res.render('courses',{
-//         title:"courses || Page"
-//     });
-// });
 
-// app.get('/login',function(req,res){
-//     return res.render('login',{
-//         title:"login || Page"
-//     });
-// });
+app.get('/addcourse',function( req,res){
+return res.render('add_course');
+});
 
-// app.get('/playlist',function(req,res){
-//     return res.render('playlist',{
-//         title:"playlist || Page"
-//     });
-// });
 
-// app.get('/profile',function(req,res){
-//     return res.render('profile',{
-//         title:"profile || Page"
-//     });
-// });
 
-// app.get('/register',function(req,res){
-//     return res.render('register',{
-//         title:"register || Page"
-//     });
+// app.post('/uploads',upload.single('imageFile') ,(req,res)=>{
+//         console.log(req.body);
+//         console.log(req.file);
+
+//         return res.redirect('back');
 // });
 
 
-// app.get('/teacher_profile',function(req,res){
-//     return res.render('teacher_profile',{
-//         title:"teacher_profile || Page"
-//     });
-// });
-// app.get('/teachers',function(req,res){
-//     return res.render('teachers',{
-//         title:"teachers || Page"
-//     });
-// });
-// app.get('/update',function(req,res){
-//     return res.render('update',{
-//         title:"updates || Page"
-//     });
-// });
-// app.get('/watch-video',function(req,res){
-//     return res.render('watch-video',{
-//         title:"watch-video || Page"
-//     });
-// });
+app.post('/uploads',upload.single('course') ,(req,res)=>{
+  console.log(req.body);
+  console.log(req.file);
+
+  return res.redirect('back');
+});
 
 
 
