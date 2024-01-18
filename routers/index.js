@@ -18,10 +18,10 @@ router.get('/home',homeController.home);
 router.get('/home2',homeController.home2);
 
 router.get('/students/home',homeController.home);
-
+router.get('/teacher',homeController.teacher);
 router.get('/about',homeController.about);
 router.get('/contact',homeController.contact)
-router.get('/profile'  ,  homeController.profile);
+router.get('/profile',homeController.profile);
 router.get('/register',homeController.Signup);
 router.get('/login',homeController.login);
 router.get('/courses',homeController.courses || homeController.getAllCourses);

@@ -61,6 +61,82 @@ module.exports.teachers_profile = function(req,res){
     });
     
 }
+module.exports.homeT = function(req,res){
+    // Access user information from the session
+    const teacher = req.session.teacher;
+
+    // check if the user is logged in
+    if(!teacher){
+
+        return res.redirect('/home');
+    }
+    const isTeacherAuthenticated = Boolean(req.session.teacher);
+
+    // render to the teachers cursers page with user information
+    return res.render('homeT',{
+        title:"teachers home page",
+        isTeacherAuthenticated: isTeacherAuthenticated,
+        teacherName: teacher.name,
+    }); 
+}
+module.exports.aboutT = function(req,res){
+    // Access user information from the session
+    const teacher = req.session.teacher;
+
+    // check if the user is logged in
+    if(!teacher){
+
+        return res.redirect('/about');
+    }
+    const isTeacherAuthenticated = Boolean(req.session.teacher);
+
+    // render to the teachers cursers page with user information
+    return res.render('aboutT',{
+        title:"teachers home page",
+        isTeacherAuthenticated: isTeacherAuthenticated,
+        teacherName: teacher.name,
+    }); 
+}
+
+module.exports.coursesT = function(req,res){
+    // Access user information from the session
+    const teacher = req.session.teacher;
+
+    // check if the user is logged in
+    if(!teacher){
+
+        return res.redirect('/home');
+    }
+    const isTeacherAuthenticated = Boolean(req.session.teacher);
+
+    // render to the teachers cursers page with user information
+    return res.render('coursesT',{
+        title:"teachers home page",
+        isTeacherAuthenticated: isTeacherAuthenticated,
+        teacherName: teacher.name,
+    }); 
+}
+
+module.exports.contactT = function(req,res){
+    // Access user information from the session
+    const teacher = req.session.teacher;
+
+    // check if the user is logged in
+    if(!teacher){
+
+        return res.redirect('/contact');
+    }
+    const isTeacherAuthenticated = Boolean(req.session.teacher);
+
+    // render to the teachers cursers page with user information
+    return res.render('contactT',{
+        title:"teachers contact page",
+        isTeacherAuthenticated: isTeacherAuthenticated,
+        teacherName: teacher.name,
+        teacherEmail: teacher.email,
+    }); 
+}
+
 module.exports.teachers_signup = function(req ,res){
     return res.render('teacher_signup');
 }
@@ -129,7 +205,7 @@ console.log("name", teacherName , teacherEmail);
         const   isTeacherAuthenticated = Boolean(req.session.teacher);
 
         console.log("you are logged in successfully");
-        return res.redirect('/teachers');
+        return res.redirect('/teachers/home');
     }else{
         return res.redirect('back');
 

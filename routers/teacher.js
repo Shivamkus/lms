@@ -1,10 +1,16 @@
 const express = require('express');
 const router = express.Router();
 const teacherController = require('../controllers/teachers_Controller');
+const homeController =require('../controllers/home_Controller');
 router.use(express.static('./assets'));
+router.use(express.static('../assets'));
 
 router.get('/', teacherController.teachers);
+router.get('/home',teacherController.homeT);
+router.get('/about',teacherController.aboutT);
+router.get('/courses',teacherController.coursesT);
 router.get('/profile',teacherController.teachers_profile);
+router.get('/contact',teacherController.contactT);
 router.get('/signup',teacherController.teachers_signup);
 router.get('/login', teacherController.login);
 

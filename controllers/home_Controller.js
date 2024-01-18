@@ -1,6 +1,7 @@
 // controllers/courseController.js
 const Course = require('../models/course');
 
+
 // exports.showForm = (req, res) => {
 //   res.render('addCourseForm');
 // };
@@ -68,7 +69,7 @@ module.exports.home2 = function(req, res) {
     const teacher = req.session.teacher;
 
     if (!user && !teacher) {
-        return res.render('home', {
+        return res.render('home2', {
             title: "Home || Page",
             isAuthenticated: false,
         });
@@ -86,7 +87,7 @@ module.exports.home2 = function(req, res) {
             // Add other teacher-specific data
         };
 
-        return res.render('home', {
+        return res.render('home2', {
             title: "Home || Page",
             isAuthenticated: true,
             isTeacherAuthenticated: true,
@@ -101,7 +102,7 @@ module.exports.home2 = function(req, res) {
             // Add other student-specific data
         };
 
-        return res.render('home', {
+        return res.render('home2', {
             title: "Home || Page",
             isAuthenticated: true,
             isTeacherAuthenticated: false,
@@ -207,6 +208,24 @@ module.exports.profile = function (req, res) {
     });
 };
 
+module.exports.teacher = function (req, res) {
+    // Access user information from the session
+    const user = req.session.user;
+
+    // Check if the user is logged in
+    if (!user) {
+        return res.redirect('/login');
+    }
+
+    // Render the profile page with user information
+    return res.render('teachersS', {
+        title: "teachers Page",
+        userName: user.name,
+        isAuthenticated: true,
+
+        // Add other user details as needed
+    });
+};
 module.exports.update = function (req, res) {
     // Access user information from the session
     const user = req.session.user;

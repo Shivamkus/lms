@@ -19,7 +19,7 @@ const userSchema = new mongoose.Schema({
     },
     roll:{
         type:String,
-        required:true
+        
   },
 },
     {

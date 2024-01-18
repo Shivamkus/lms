@@ -80,11 +80,12 @@
    </div>
 
    <nav class="navbar">
-      <a href="/home"><i class="fas fa-home"></i><span>home</span></a>
-      <a href="/about"><i class="fas fa-question"></i><span>about</span></a>
-      <a href="/courses"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+      <a href="/teachers/home"><i class="fas fa-home"></i><span>home</span></a>
+      <a href="/teachers/about"><i class="fas fa-question"></i><span>about</span></a>
+      <a href="/teachers/courses"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
+      <a href="/addCourse"><i class="fas fa-plus"></i><span>add courses</span></a>
       <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
-      <a href="/contact"><i class="fas fa-headset"></i><span>contact us</span></a>
+      <a href="/teachers/contact"><i class="fas fa-headset"></i><span>contact us</span></a>
    </nav>
 
 </div> 
@@ -117,7 +118,13 @@
         <p>course name <span>*</span></p>
        <input type="text" name="name" placeholder="enter your name"  maxlength="50" class="box">
        <p>ADD file <span>*</span></p> 
-     <input type="file" accept="image/*" name="course" required class="box">
+       <p>upload image file here <span>*</span></p>
+     <input type="file" accept="image/*" name="course"  class="box">
+     <p>upload video file here <span>*</span></p>
+     <input type="file" accept="video/*" name="course"  class="box">
+     <p>upload pdf file here <span>*</span></p>
+     <input type="file" accept="pdf/*" name="course"  class="box">
+
        <input type="submit" value="ADD Courses" name="submit" class="btn">
     </form>
  
@@ -130,9 +137,8 @@
        <!-- <h3>register now</h3> -->
        <p>Test name <span>*</span></p>
        <input type="text" name="name" placeholder="enter your name" required maxlength="50" class="box">
-      
-       <p>select profile <span>*</span></p>
-       <input type="file" accept="image/*" required class="box">
+       <p>add test image/ pdf <span>*</span></p>
+       <input type="file" name="test" required class="box">
        <input type="submit" value="ADD Test" name="submit" class="btn">
     </form>
  
