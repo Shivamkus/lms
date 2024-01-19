@@ -7,7 +7,12 @@ router.use(express.static('../assets'));
 
 router.get('/', teacherController.teachers);
 router.get('/home',teacherController.homeT);
+router.get('/homepage',teacherController.homeTpage);
+
 router.get('/about',teacherController.aboutT);
+router.get('/aboutt',teacherController.aboutTpage)
+router.get('/contactT',teacherController.contactTpage)
+
 router.get('/courses',teacherController.coursesT);
 router.get('/profile',teacherController.teachers_profile);
 router.get('/contact',teacherController.contactT);
@@ -26,7 +31,7 @@ router.get('/logout', async function (req, res) {
         }
 
         // Redirect the user to the home page (or any other desired page)
-        res.redirect('back');
+        res.redirect('/teachers/home');
     });
 });
 

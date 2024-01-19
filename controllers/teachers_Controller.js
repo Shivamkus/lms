@@ -18,6 +18,17 @@
 // controllers/teachers_Controller.js
 
 // ...
+module.exports.homeTpage = function(req,res){
+    return res.render('teacherhome');
+}
+
+module.exports.aboutTpage = function(req,res){
+    return res.render('about_teacher');
+}
+
+module.exports.contactTpage = function(req,res){
+    return res.render('contactTeacher');
+}
 
 module.exports.teachers = function (req, res) {
     const teacher = req.session.teacher;
@@ -68,7 +79,7 @@ module.exports.homeT = function(req,res){
     // check if the user is logged in
     if(!teacher){
 
-        return res.redirect('/home');
+        return res.redirect('/teachers/homepage');
     }
     const isTeacherAuthenticated = Boolean(req.session.teacher);
 
@@ -86,7 +97,9 @@ module.exports.aboutT = function(req,res){
     // check if the user is logged in
     if(!teacher){
 
-        return res.redirect('/about');
+        return res.render('about_teacher',{
+        isTeacherAuthenticated:false
+        });
     }
     const isTeacherAuthenticated = Boolean(req.session.teacher);
 
@@ -124,7 +137,9 @@ module.exports.contactT = function(req,res){
     // check if the user is logged in
     if(!teacher){
 
-        return res.redirect('/contact');
+        return res.render('contactTeacher',{
+            isTeacherAuthenticated:false
+        });
     }
     const isTeacherAuthenticated = Boolean(req.session.teacher);
 
