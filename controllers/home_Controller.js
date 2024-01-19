@@ -6,6 +6,10 @@ const Course = require('../models/course');
 //   res.render('addCourseForm');
 // };
 
+module.exports.home11 = function( req,res){
+    return res.render('home11');
+}
+
 exports.uploadFile = async (req, res) => {
   try {
     const { name } = req.body;

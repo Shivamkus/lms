@@ -13,7 +13,7 @@ router.use(express.static('./assets'));
 router.use(express.static('../assets'));
 
 
-router.get('/', homeController.home);
+router.get('/', homeController.home11);
 router.get('/home',homeController.home);
 router.get('/home2',homeController.home2);
 
