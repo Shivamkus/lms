@@ -111,128 +111,35 @@
       <button type="submit" class="fas fa-search" name="search_tutor"></button>
    </form>
 
-   <div class="box-container">
 
-      <div class="box offer">
-         <h3>become a tutor</h3>
-         <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Eveniet, itaque ipsam fuga ex et aliquam.</p>
-         <a href="http://localhost:5000/register" class="inline-btn">get started</a>
-      </div>
 
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-2.jpg" alt="">
-            <div>
-               <h3>john deo</h3>
-               <span>developer</span>
-            </div>
-         </div>
-         <p>total playlists : <span>4</span></p>
-         <p>total videos : <span>18</span></p>
-         <p>total likes : <span>1208</span></p>
-         <a href="/teachers/profile" class="inline-btn">view profile</a>
-      </div>
+      <ul class="list_ul">
+         <div class="box-container">
 
-      <div class="box">
+              <% for (let i of teacher_list) {%>
+               <li class="list_li" style="list-style: none; ">
+
+                  <div class="box">
          <div class="tutor">
             <img src="images/pic-3.jpg" alt="">
             <div>
-               <h3>john deo</h3>
-               <span>developer</span>
+               <h3><%=i.name %></h3>
+               <span>Teacher</span>
             </div>
          </div>
+         <p>Email : <span><%=i.email %></span></p>
          <p>total playlists : <span>4</span></p>
          <p>total videos : <span>18</span></p>
          <p>total likes : <span>1208</span></p>
          <a href="/teachers/profile" class="inline-btn">view profile</a>
-      </div>
 
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-4.jpg" alt="">
-            <div>
-               <h3>john deo</h3>
-               <span>developer</span>
-            </div>
-         </div>
-         <p>total playlists : <span>4</span></p>
-         <p>total videos : <span>18</span></p>
-         <p>total likes : <span>1208</span></p>
-         <a href="/teachers/profile" class="inline-btn">view profile</a>
-      </div>
+   </div>
+</li>
 
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-5.jpg" alt="">
-            <div>
-               <h3>john deo</h3>
-               <span>developer</span>
-            </div>
-         </div>
-         <p>total playlists : <span>4</span></p>
-         <p>total videos : <span>18</span></p>
-         <p>total likes : <span>1208</span></p>
-         <a href="/teachers/profile" class="inline-btn">view profile</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-6.jpg" alt="">
-            <div>
-               <h3>john deo</h3>
-               <span>developer</span>
-            </div>
-         </div>
-         <p>total playlists : <span>4</span></p>
-         <p>total videos : <span>18</span></p>
-         <p>total likes : <span>1208</span></p>
-         <a href="/teachers/profile" class="inline-btn">view profile</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-7.jpg" alt="">
-            <div>
-               <h3>john deo</h3>
-               <span>developer</span>
-            </div>
-         </div>
-         <p>total playlists : <span>4</span></p>
-         <p>total videos : <span>18</span></p>
-         <p>total likes : <span>1208</span></p>
-         <a href="/teachers/profile" class="inline-btn">view profile</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-8.jpg" alt="">
-            <div>
-               <h3>john deo</h3>
-               <span>developer</span>
-            </div>
-         </div>
-         <p>total playlists : <span>4</span></p>
-         <p>total videos : <span>18</span></p>
-         <p>total likes : <span>1208</span></p>
-         <a href="/teachers/profile" class="inline-btn">view profile</a>
-      </div>
-
+   <%}%>
+      </ul>
 
       
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-3.jpg" alt="">
-            <div>
-               <h3>john deo</h3>
-               <span>developer</span>
-            </div>
-         </div>
-         <p>total playlists : <span>4</span></p>
-         <p>total videos : <span>18</span></p>
-         <p>total likes : <span>1208</span></p>
-         <a href="/teachers/profile" class="inline-btn">view profile</a>
-      </div>
-
    </div>
 
 </section>

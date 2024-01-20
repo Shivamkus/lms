@@ -1,5 +1,8 @@
 // controllers/courseController.js
 const Course = require('../models/course');
+const Teacher = require('../models/teacher')
+const User = require('../models/user');
+const Contact = require('../models/contact');
 
 
 // exports.showForm = (req, res) => {
@@ -66,7 +69,6 @@ module.exports.home = function(req,res){
     });
 }
  
-const Teacher = require('../models/teacher')
 
 module.exports.home2 = function(req, res) {
     const user = req.session.user;
@@ -165,8 +167,6 @@ module.exports.contact = function(req,res){
       });
    }
 
-const User = require('../models/user');
-const Contact = require('../models/contact');
 
 // create get in tuch = contactus routes data
 
@@ -186,12 +186,6 @@ module.exports.createContact = async function(req ,res){
     }
 }
 
-// module.exports.profile = function(req,res){
-//     return res.render('profile',{
-
-//     });
-
-// }
 
 module.exports.profile = function (req, res) {
     // Access user information from the session
@@ -212,7 +206,7 @@ module.exports.profile = function (req, res) {
     });
 };
 
-module.exports.teacher = function (req, res) {
+module.exports.teacher = async function (req, res) {
     // Access user information from the session
     const user = req.session.user;
 
@@ -220,15 +214,23 @@ module.exports.teacher = function (req, res) {
     if (!user) {
         return res.redirect('/login');
     }
-
-    // Render the profile page with user information
+  
+try {
+    const teacherss = await Teacher.find({ });
+       // Render the profile page with user information
     return res.render('teachersS', {
         title: "teachers Page",
         userName: user.name,
         isAuthenticated: true,
+        teacher_list : teacherss
 
         // Add other user details as needed
     });
+} catch (error) {
+    console.log("error on fatching teachers");
+}
+
+    
 };
 module.exports.update = function (req, res) {
     // Access user information from the session
@@ -426,6 +428,31 @@ module.exports.playlist = function (req, res) {
     }
  }
 
+ module.exports.create1 =  async function(req,res){
+    console.log('we are at Add student by teacher');
+    if(req.body.password != req.body.confirm_password){
+        console.log(req.body.password + " " + req.body.confirm_password);
+        return res.redirect('back');
+    }
+    try {
+        const user = await User.findOne({email: req.body.email});
+        if(user){
+            console.log("User is already exist");
+            return res.redirect("back");
+        }else{
+            const newUSer = await User.create(req.body);
+            if(!newUSer){
+                console.log("error on creating new user");
+                return res.redirect('back');
+            }
+            console.log("student added successfully");
+            return res.redirect('/addCourse');
+        }
+        
+    } catch (error) {
+        console.log("error on catch ",error);
+    }
+ }
 
 
 // // login route

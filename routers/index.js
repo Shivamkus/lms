@@ -31,7 +31,7 @@ router.get('/update',homeController.update);
 router.get('/watch-video',homeController.watch_video);
 router.get('/addCourse',homeController.AddCourse);
 router.post('/create',homeController.create);
-router.post('/addStudent',homeController.create)
+router.post('/addStudent',homeController.create1)
 router.post('/create-session',homeController.createSession);
 router.post('/create-contact',homeController.createContact)
 router.post('/user_Update',homeController.updateuser);

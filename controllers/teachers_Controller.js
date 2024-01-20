@@ -1,21 +1,4 @@
-// module.exports.teachers = function (req,res){
-//     const teacher = req.session.teacher;
-
-
-//     if(!teacher){
-
-//         return res.redirect('/teachers/login');
-
-//     }
-//     // render to the teachers cursers page with user information
-//     return res.render('teachers',{
-//         title:"teachers || Profile",
-//         isTeacherAuthenticated: true,
-//         teacherName: teacher.name,
-//     });
-// }
-
-// controllers/teachers_Controller.js
+const Teacher =require('../models/teacher');
 
 // ...
 module.exports.homeTpage = function(req,res){
@@ -30,22 +13,31 @@ module.exports.contactTpage = function(req,res){
     return res.render('contactTeacher');
 }
 
-module.exports.teachers = function (req, res) {
+module.exports.teachers = async function (req, res) {
     const teacher = req.session.teacher;
 
     if (!teacher) {
         return res.redirect('/teachers/login');
     }
 
-    // Move the authentication-related code here
+     try {
+        const teacherss = await Teacher.find({ });
+         // Move the authentication-related code here
     const isTeacherAuthenticated = Boolean(req.session.teacher);
 
     // Render to the teachers page with user information
     return res.render('teachers', {
         title: "teachers || Profile",
+        teacher_list : teacherss,
         isTeacherAuthenticated: isTeacherAuthenticated,
         teacherName: teacher.name,
     });
+        
+     } catch (error) {
+        console.log("error on finding teachers");
+     }
+
+   
 }
 
 // ...
@@ -159,7 +151,7 @@ module.exports.login = function(req,res){
     return res.render('teacher_login');
 }
 
-const Teacher = require('../models/teacher');
+// const Teacher = require('../models/teacher');
 
 // signup route for teacher
 module.exports.create =  async function(req,res){
