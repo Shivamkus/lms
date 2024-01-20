@@ -11,6 +11,8 @@ const db =require('./config/db');
 const SignUp = require('./models/user');
 const session = require('express-session');
 const multer = require('multer');
+const Course = require('./models/course');
+const videoCourse = require('./models/videoCourse');
 
 
 
@@ -38,16 +40,6 @@ app.set('views','./views');
 
 
 
-const storage = multer.diskStorage({
-  destination : function(req , file, cb){
-      return cb(null, './assets/uploads');
-  },
-  filename : function(req,file, cb){
-      return cb(null, `${Date.now()}-${file.originalname}`);
-  }
-});
-
-const upload = multer({storage});
 
 
 app.use(express.urlencoded({extended: false}));
@@ -68,11 +60,69 @@ return res.render('add_course');
 // });
 
 
-app.post('/uploads',upload.single('course') ,(req,res)=>{
-  console.log(req.body);
-  console.log(req.file);
-console.log("course added seccessfully\n");
-  return res.redirect('back');
+// app.post('/uploads',upload.single('course') ,(req,res)=>{
+//   console.log(req.body);
+//   console.log(req.file);
+// console.log("course added seccessfully\n");
+//   return res.redirect('back');
+// });
+
+const storage = multer.diskStorage({
+  destination : function(req , file, cb){
+      return cb(null, './assets/uploads/images');
+  },
+  filename : function(req,file, cb){
+      return cb(null, `${file.originalname}`); // you can add here teacher id also..
+  }
+});
+
+const upload = multer({storage});
+app.post('/uploads', upload.single('imagefile'), async (req, res) => {
+  try {
+      const { playlist , name } = req.body;
+      const { originalname, path } = req.file;
+
+      // const image = new Image({ name, fileName: originalname });
+      const image = new Course({ playlist, name, fileName: originalname });
+
+      await image.save();
+     console.log("file uploaded successfully");
+      res.redirect('/teachers/home');
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+  }
+});
+
+
+/// create a multer controller for the video upload and fatch
+
+const storagevideo = multer.diskStorage({
+  destination : function(req , file, cb){
+      return cb(null, './assets/uploads/videos');
+  },
+  filename : function(req,file, cb){
+      return cb(null, `${file.originalname}`); // you can add here teacher id also..
+  }
+});
+const uploadvideo = multer({storage:storagevideo});
+
+
+app.post('/uploads1', uploadvideo.single('videofile'), async (req, res) => {
+  try {
+      const { playlist , name } = req.body;
+      const { originalname, path } = req.file;
+
+      // const image = new Image({ name, fileName: originalname });
+      const video = new videoCourse({ playlist, name, fileName: originalname });
+
+      await video.save();
+     console.log("video uploaded successfully");
+      res.redirect('/teachers/home');
+  } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+  }
 });
 
 
@@ -85,6 +135,8 @@ const storagetest = multer.diskStorage({
         return cb(null, `${Date.now()}-${file.originalname}`);
     }
   });
+
+
   
 //   const uploadtest = multer({storagetest});
   const uploadtest = multer({ storage: storagetest });

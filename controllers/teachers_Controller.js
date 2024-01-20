@@ -1,5 +1,5 @@
 const Teacher =require('../models/teacher');
-
+const User = require('../models/user');
 // ...
 module.exports.homeTpage = function(req,res){
     return res.render('teacherhome');
@@ -35,11 +35,34 @@ module.exports.teachers = async function (req, res) {
         
      } catch (error) {
         console.log("error on finding teachers");
-     }
-
-   
+     } 
 }
 
+
+module.exports.AllStudents = async function (req, res) {
+    const teacher = req.session.teacher;
+
+    if (!teacher) {
+        return res.redirect('/teachers/login');
+    }
+
+     try {
+        const students = await User.find({ });
+         // Move the authentication-related code here
+    const isTeacherAuthenticated = Boolean(req.session.teacher);
+
+    // Render to the teachers page with user information
+    return res.render('AllStudents', {
+        title: "students || Profile",
+        student_list : students,
+        isTeacherAuthenticated: isTeacherAuthenticated,
+        teacherName: teacher.name,
+    });
+        
+     } catch (error) {
+        console.log("error on finding teachers");
+     } 
+}
 // ...
 
 
@@ -151,7 +174,37 @@ module.exports.login = function(req,res){
     return res.render('teacher_login');
 }
 
-// const Teacher = require('../models/teacher');
+module.exports.teacherprofilebyid = async function(req,res){
+    const teacher = req.session.teacher;
+
+    // check if the user is logged in
+    if(!teacher){
+
+        return res.render('/teachers/login',{
+            isTeacherAuthenticated:false
+        });
+    }
+    const isTeacherAuthenticated = Boolean(req.session.teacher);
+    try {
+        const id = req.params.id; // Use req.params.id to get the teacher ID from the URL
+        const teacher = await Teacher.findById(id);
+    
+        // Render the 'teacherID' EJS file and pass the teacher data to it
+        return res.render('teacherID', {
+             teacher,
+             isTeacherAuthenticated : isTeacherAuthenticated,
+            //  teacherName: teacher.name,
+            //  teacherEmail: teacher.email,
+            });
+      } catch (error) {
+        console.log("Error on finding teacher by ID:", error);
+        // Handle the error appropriately
+        res.status(500).send("Internal Server Error");
+      }
+}
+
+
+
 
 // signup route for teacher
 module.exports.create =  async function(req,res){

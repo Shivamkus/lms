@@ -25,6 +25,7 @@ router.get('/profile',homeController.profile);
 router.get('/register',homeController.Signup);
 router.get('/login',homeController.login);
 router.get('/courses',homeController.courses || homeController.getAllCourses);
+router.get('/course',homeController.dashbord);
 router.get('/playlist',homeController.playlist);
 router.get('/teacher_profile',homeController.teachers_profile);
 router.get('/update',homeController.update);

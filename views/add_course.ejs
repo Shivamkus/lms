@@ -85,6 +85,7 @@
       <a href="/teachers/courses"><i class="fas fa-graduation-cap"></i><span>courses</span></a>
       <a href="/addCourse"><i class="fas fa-plus"></i><span>add courses</span></a>
       <a href="/teachers"><i class="fas fa-chalkboard-user"></i><span>teachers</span></a>
+      <a href="/teachers/allstudents"><i class="fas fa-user"></i><span>students</span></a>
       <a href="/teachers/contact"><i class="fas fa-headset"></i><span>contact us</span></a>
    </nav>
 
@@ -115,20 +116,34 @@
  <section class="form-container">
     <form action="/uploads" method="POST" enctype="multipart/form-data" >
         <h3>ADD Courses</h3>
+        <p>Playlist name <span>*</span></p>
+       <input type="text" name="playlist" placeholder="enter your playlist" required maxlength="50" class="box">
         <p>course name <span>*</span></p>
-       <input type="text" name="name" placeholder="enter your name"  maxlength="50" class="box">
+       <input type="text" name="name" placeholder="enter your name" required maxlength="50" class="box">
        <p>ADD file <span>*</span></p> 
        <p>upload image file here <span>*</span></p>
-     <input type="file" accept="image/*" name="course"  class="box">
-     <p>upload video file here <span>*</span></p>
-     <input type="file" accept="video/*" name="course"  class="box">
-     <p>upload pdf file here <span>*</span></p>
-     <input type="file" accept="pdf/*" name="course"  class="box">
-
+     <input type="file" accept="image/*" name="imagefile" required class="box">
+     
        <input type="submit" value="ADD Courses" name="submit" class="btn">
     </form>
  
  </section>
+ <section class="form-container">
+   <form action="/uploads1" method="POST" enctype="multipart/form-data" >
+       <h3>ADD Video Courses</h3>
+       <p>Playlist name <span>*</span></p>
+      <input type="text" name="playlist" placeholder="enter your playlist" required maxlength="50" class="box">
+       <p>course name <span>*</span></p>
+      <input type="text" name="name" placeholder="enter your name" required  maxlength="50" class="box">
+      <p>ADD file <span>*</span></p> 
+    <p>upload video file here <span>*</span></p>
+    <input type="file" accept="video/*" name="videofile" required class="box">
+
+      <input type="submit" value="ADD Courses" name="submit" class="btn">
+   </form>
+
+</section>
+
 
  <section class="form-container">
     <form action="/addTest" method="POST" enctype="multipart/form-data">

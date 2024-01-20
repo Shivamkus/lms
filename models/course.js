@@ -2,12 +2,16 @@
 const mongoose = require('mongoose');
 
 const courseSchema = new mongoose.Schema({
+  playlist:{
+    type:String,
+    required :true
+  },
+  
   name: {
     type: String,
     required: true,
-    maxlength: 50,
   },
-  file: {
+  fileName: {
     type: String,
     required: true,
   },
@@ -16,3 +20,4 @@ const courseSchema = new mongoose.Schema({
 const Course = mongoose.model('Course', courseSchema);
 
 module.exports = Course;
+

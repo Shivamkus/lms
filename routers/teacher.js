@@ -12,9 +12,10 @@ router.get('/homepage',teacherController.homeTpage);
 router.get('/about',teacherController.aboutT);
 router.get('/aboutt',teacherController.aboutTpage)
 router.get('/contactT',teacherController.contactTpage)
-
+router.get('/allstudents',teacherController.AllStudents)
 router.get('/courses',teacherController.coursesT);
 router.get('/profile',teacherController.teachers_profile);
+router.get('/profile/:id',teacherController.teacherprofilebyid);
 router.get('/contact',teacherController.contactT);
 router.get('/signup',teacherController.teachers_signup);
 router.get('/login', teacherController.login);

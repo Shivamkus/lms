@@ -3,11 +3,44 @@ const Course = require('../models/course');
 const Teacher = require('../models/teacher')
 const User = require('../models/user');
 const Contact = require('../models/contact');
-
+const VideoCourse = require('../models/videoCourse');
+// const videoCourse = require('../models/videoCourse');
 
 // exports.showForm = (req, res) => {
 //   res.render('addCourseForm');
 // };
+
+// Fetch and render images on dashboard
+
+
+  module.exports.dashbord = async function(req,res){
+    const user = req.session.user
+//   const isTeacherAuthenticated = Boolean(req.session.teacher);
+
+  // check the user is login or not
+  if(!user){
+    return res.render('home',{
+        title:"home || Page",
+        isAuthenticated: false,
+    });
+  }
+   
+    try {
+        const course = await Course.find({}, { _id: 1, name: 1, fileName: 1 });
+        const videoCourse = await VideoCourse.find({},{ _id: 1, name: 1, fileName: 1 })
+        res.render('couseDashbord', { 
+            course,
+            videoCourse,
+            isAuthenticated:true ,
+            userName: user.name,
+
+        
+        });
+    } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+    }
+  }
 
 module.exports.home11 = function( req,res){
     return res.render('home11');
