@@ -16,6 +16,7 @@ router.use(express.static('../assets'));
 router.get('/', homeController.home11);
 router.get('/home',homeController.home);
 router.get('/home2',homeController.home2);
+router.post('/addComments',homeController.addcomments);
 
 router.get('/students/home',homeController.home);
 router.get('/teacher',homeController.teacher);

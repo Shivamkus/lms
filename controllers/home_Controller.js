@@ -4,11 +4,30 @@ const Teacher = require('../models/teacher')
 const User = require('../models/user');
 const Contact = require('../models/contact');
 const VideoCourse = require('../models/videoCourse');
+const Comment = require('../models/comment');
 // const videoCourse = require('../models/videoCourse');
 
 // exports.showForm = (req, res) => {
 //   res.render('addCourseForm');
 // };
+
+module.exports.addcomments=  async (req, res) => {
+    try {
+      const { userName, comment_box } = req.body;
+  
+      const newComment = new Comment({
+        userName,
+        commentBox: comment_box,
+      });
+  
+      await newComment.save();
+  console.log(req.body ,"commented seccesfully");
+      res.redirect('/watch-video'); // Redirect to the home page or wherever you want
+    } catch (error) {
+      console.error(error);
+      res.status(500).send('Internal Server Error');
+    }
+  }
 
 // Fetch and render images on dashboard
 
@@ -349,17 +368,33 @@ module.exports.courses = function (req, res) {
     });
 };
 
-module.exports.watch_video = function(req ,res){
+module.exports.watch_video =async function(req ,res){
     const user = req.session.user ;
     if(!user){
         return res.redirect('/login');
 
     }
-  return  res.render("watch-video",{
-    userName : user.name,
-    isAuthenticated: true
-  });
-}
+
+
+    try {
+        const comments = await Comment.find({}, 'userName commentBox createdAt').sort({ createdAt: -1 });
+        // res.render('all-comments', { comments });
+        return  res.render("watch-video",{
+            userName : user.name,
+            isAuthenticated: true,
+             comments,
+            });
+
+
+      } catch (error) {
+        console.error(error);
+        res.status(500).send('Internal Server Error');
+      }
+    }
+
+
+  
+
 
 // module.exports.playlist = function (req, res) {
 //     // Access user information from the session

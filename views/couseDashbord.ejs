@@ -121,14 +121,57 @@
            </div>
   
            <div class="thumb">
+            <a href="/uploads/videos/<%= videofile.fileName %>">
             <video src="/uploads/videos/<%= videofile.fileName %>" controls poster="images/post-1-1.png" style="height: 200px;" width="350px" id="video" ></video>
-
+         </a>
               <span><%= videofile.name %></span>
+               <button id="createFormButton">Add comment</button>
+               <div id="dynamicFormContainer" style="display: none;"></div>
            </div>
            <h3 class="title"><%= videofile.name %></h3>
            <a href="/playlist" class="inline-btn">view playlist</a>
         </div>
         <% }); %>
+  
+        <script>
+         
+// public/scripts.js
+document.addEventListener('DOMContentLoaded', function () {
+   const createFormButton = document.getElementById('createFormButton');
+   const dynamicFormContainer = document.getElementById('dynamicFormContainer');
+ 
+   createFormButton.addEventListener('click', function () {
+     // Create and append the input and submit button
+     const input = document.createElement('input');
+     const submitButton = document.createElement('button');
+     const commentsButton = document.createElement('button');
+ 
+     input.type = 'text';
+     submitButton.textContent = 'Submit';
+     commentsButton.textContent = 'Comments';
+ 
+     dynamicFormContainer.innerHTML = ''; // Clear previous content
+     dynamicFormContainer.appendChild(input);
+     dynamicFormContainer.appendChild(submitButton);
+ 
+     // Handle form submission
+     submitButton.addEventListener('click', function () {
+       const inputValue = input.value;
+       // Perform AJAX request to submit the input value to the server
+       // For simplicity, the following line is just a console log
+       console.log('Submitted value:', inputValue);
+ 
+       // Hide the form and show the comments button
+       dynamicFormContainer.style.display = 'none';
+       commentsButton.style.display = 'inline-block';
+     });
+ 
+     // Show the form container
+     dynamicFormContainer.style.display = 'block';
+   });
+ });
+ 
+        </script>
 
 <!--       
 <h1>Image Gallery</h1>
@@ -139,134 +182,7 @@
     </div>
 <% }); %> -->
 
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-3.jpg" alt="">
-            <div class="info">
-               <h3>john deo</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb">
-            <img src="images/thumb-2.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete CSS tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-4.jpg" alt="">
-            <div class="info">
-               <h3>john deo</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb">
-            <img src="images/thumb-3.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete JS tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-5.jpg" alt="">
-            <div class="info">
-               <h3>john deo</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb">
-            <img src="images/thumb-4.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete Boostrap tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-6.jpg" alt="">
-            <div class="info">
-               <h3>john deo</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb">
-            <img src="images/thumb-5.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete JQuery tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-7.jpg" alt="">
-            <div class="info">
-               <h3>john deo</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb">
-            <img src="images/thumb-6.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete SASS tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-8.jpg" alt="">
-            <div class="info">
-               <h3>john deo</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb">
-            <img src="images/thumb-7.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete PHP tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-9.jpg" alt="">
-            <div class="info">
-               <h3>john deo</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb">
-            <img src="images/thumb-8.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete MySQL tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div>
-
-      <div class="box">
-         <div class="tutor">
-            <img src="images/pic-1.jpg" alt="">
-            <div class="info">
-               <h3>john deo</h3>
-               <span>21-10-2022</span>
-            </div>
-         </div>
-         <div class="thumb">
-            <img src="images/thumb-9.png" alt="">
-            <span>10 videos</span>
-         </div>
-         <h3 class="title">complete react tutorial</h3>
-         <a href="/playlist" class="inline-btn">view playlist</a>
-      </div> -->
-
+      
 
    </div>
 

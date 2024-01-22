@@ -126,31 +126,59 @@
 
    <h1 class="heading">5 comments</h1>
 
-   <form action="" class="add-comment">
+   <form action="/addComments" method="post" class="add-comment">
       <h3>add comments</h3>
       <textarea name="comment_box" placeholder="enter your comment" required maxlength="1000" cols="30" rows="10"></textarea>
+      <input type="hidden" name="userName" value="<%=userName%>">
       <input type="submit" value="add comment" class="inline-btn" name="add_comment">
    </form>
+   <h1>All Comments</h1>
+
+   <% if (comments.length > 0) { %>
+     <ul>
+       <% comments.forEach(comment => { %>
+         <li>
+           <strong><%=comment.userName %></strong>  <%= comment.commentBox %>
+         </li>
+       <% }) %>
+     </ul>
+   <% } else { %>
+     <p>No comments available.</p>
+   <% } %>
+ 
 
    <h1 class="heading">user comments</h1>
-
    <div class="box-container">
-
+   <% if (comments.length > 0) { %>
+      <ul>
+      <% comments.forEach(comment => { %>
+      <li style="list-style: none;">
       <div class="box">
          <div class="user">
             <img src="images/pic-1.jpg" alt="">
             <div>
-               <h3>shaikh anas</h3>
+               <h3><%=comment.userName %></h3>
                <span>22-10-2022</span>
             </div>
          </div>
-         <div class="comment-box">this is a comment form shaikh anas</div>
+         <div class="comment-box"><%= comment.commentBox %></div>
+      </li>
+      <% }) %>
+    </ul>
+    <% } else { %>
+      <p>No comments available.</p>
+    <% } %>
          <form action="" class="flex-btn">
             <input type="submit" value="edit comment" name="edit_comment" class="inline-option-btn">
             <input type="submit" value="delete comment" name="delete_comment" class="inline-delete-btn">
          </form>
       </div>
+   </div>
+</div>
 
+      
+   <h1 class="heading">user comments</h1>
+   <div class="box-container">
       <div class="box">
          <div class="user">
             <img src="images/pic-2.jpg" alt="">
