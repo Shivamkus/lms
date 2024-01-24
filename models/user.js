@@ -1,4 +1,4 @@
-
+// create a schema for the users
 const mongoose = require('mongoose');
 
 

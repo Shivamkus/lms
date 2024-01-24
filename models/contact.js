@@ -1,3 +1,4 @@
+// create a schema for the contact us "give the feedback"
 const mongoose = require('mongoose');
 const contactSchema = new mongoose.Schema({
     name:{

@@ -99,6 +99,7 @@
 <section class="home-grid">
 
    <h1 class="heading">quick options</h1>
+   
 
    <div class="box-container">
 
@@ -138,17 +139,169 @@
          </div>
       </div>
 
-      <div class="box">
-         <h3 class="title">become a tutor</h3>
-         <p class="tutor">Lorem ipsum, dolor sit amet consectetur adipisicing elit. Perspiciatis, nam?</p>
-         <a href="/teachers" class="inline-btn">get started</a>
+      <% if (isAuthenticated) { %>
+      <div class="form-data box">
+         <form action="/markAttendance" method="post">
+            <!-- <label for="date">Date:</label> -->
+            <p style="font-size: 20px; color: #fff;">Date: <span style="color: red;">*</span></p>
+
+            <input type="date" id="date" name="date" class="search-form" required>
+            
+            <!-- <label for="present" style="font-size: 18px; color: #fff;">Present:</label> -->
+            <p style="font-size: 20px; color: #fff; margin-top: 10px;">Present: 
+          <input type="checkbox" id="present" name="present" value="true"></p>
+            <input type="hidden" name="userName" value="<%=userName%>">
+            <input type="hidden" name="userEmail" value="<%=userEmail%>">
+            <input type="hidden" name="user_id" value="<%=user_id%>"> 
+            <button type="submit" class="inline-btn">Mark Attendance</button>
+          </form>
+
+
+          <!-- <div class="dynamic-checkbox" id="dynamicCheckbox">
+            <p style="font-size: 20px; color: #fff; margin-top: 10px;">Additional Checkbox: 
+              <input type="checkbox" id="additionalCheckbox" name="additionalCheckbox" value="true" checked></p>
+          </div>
+        
+          <div class="success-feedback" id="successFeedback">&#10003; Attendance Marked Successfully!</div>
+        </div> -->
       </div>
 
+      
+
+
+
+      
+  <button onclick="showMessage()" class="inline-btn">Show Message</button>
+
+  <!-- Modal -->
+  <div id="overlay"></div>
+  <div id="messageModal">
+   <ul>
+      <%for(let i of Massage_list) {%>
+      <li>
+         <p><%=i.addmassage%> <span> by <%=i.teacherName%> sir</span></p>
+      </li>   
+      <%}%>
+   </ul>
+
+    <button onclick="hideMessage()" class="inline-option-btn">Close</button>
+  </div>
+
+  <script>
+    function showMessage() {
+      // Display the modal and overlay
+      document.getElementById('messageModal').style.display = 'block';
+      document.getElementById('overlay').style.display = 'block';
+    }
+
+    function hideMessage() {
+      // Hide the modal and overlay
+      document.getElementById('messageModal').style.display = 'none';
+      document.getElementById('overlay').style.display = 'none';
+    }
+  </script>
+
+
+      <%}%>
+
    </div>
+   <style>
 
+#messageModal {
+      display: none;
+      position: fixed;
+      font-size: 18px;
+      font-weight: 800;
+      top: 50%;
+      left: 50%;
+      width: 40%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #f4f0f0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+    
+    #messageModal span {
+      color: #000;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    /* Styles for the overlay */
+    #overlay {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+
+       input[type="checkbox"] {
+      width: 20px;
+      height: 20px;
+
+    }
+      .today {
+        background-color: rgb(250, 250, 251);
+        height: 40px;
+        width: 150px;
+        border-radius: 2px;
+        padding: 10px;
+        font-size: 15px;
+        font-weight: 600;
+      }
+  
+      .completed {
+        color: green;
+      }
+    </style>
 </section>
+<script>
+   document.addEventListener('DOMContentLoaded', function() {
+     // Get current date in "YYYY-MM-DD" format
+     const today = new Date().toISOString().split('T')[0];
 
+     // Set the max and min attributes of the date input
+     const dateInput = document.getElementById('date');
+     dateInput.setAttribute('max', today);
+     dateInput.setAttribute('min', today);
 
+     // Highlight today's date
+     dateInput.value = today;
+
+     // Add a class to highlight today's date
+     dateInput.classList.add('today');
+   });
+ </script>
+
+ <!-- <script>
+   document.addEventListener('DOMContentLoaded', function() {
+     const attendanceForm = document.getElementById('attendanceForm');
+     const dateInput = document.getElementById('date');
+     const attendanceMessage = document.getElementById('attendanceMessage');
+
+     attendanceForm.addEventListener('submit', function(event) {
+       event.preventDefault();
+
+       const selectedDate = dateInput.value;
+       const today = new Date().toISOString().split('T')[0];
+
+       if (selectedDate === today) {
+         dateInput.classList.add('today');
+         attendanceMessage.innerHTML = '<p class="completed">Attendance completed for today!</p>';
+       } else {
+         // Reset the message if the selected date is not today
+         attendanceMessage.innerHTML = '';
+       }
+
+       // You can submit the form to the server here if needed
+       // For example, using AJAX or by allowing the default form submission
+     });
+   });
+ </script> -->
 
 <section class="courses">
 
@@ -282,6 +435,11 @@
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Add these scripts to your HTML file -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/default.js"></script>
 
    
 </body>

@@ -1,3 +1,4 @@
+// create a schema for the user registration by teachers.
 const mongoose = require('mongoose');
 const userSchema = new mongoose.Schema({
     name:{

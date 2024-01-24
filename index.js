@@ -110,11 +110,11 @@ const uploadvideo = multer({storage:storagevideo});
 
 app.post('/uploads1', uploadvideo.single('videofile'), async (req, res) => {
   try {
-      const { playlist , name } = req.body;
+      const { playlist , name ,teacherName, teacherEmail,teacher_id } = req.body;
       const { originalname, path } = req.file;
 
       // const image = new Image({ name, fileName: originalname });
-      const video = new videoCourse({ playlist, name, fileName: originalname });
+      const video = new videoCourse({ playlist, name, fileName: originalname ,teacherName, teacherEmail,teacher_id });
 
       await video.save();
      console.log("video uploaded successfully");

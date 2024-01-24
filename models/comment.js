@@ -1,8 +1,14 @@
 // models/comment.js
-const mongoose = require('mongoose');
+
+// create a schema for the comments
+const mongoose = require("mongoose");
 
 const commentSchema = new mongoose.Schema({
   userName: {
+    type: String,
+    required: true,
+  },
+  userEmail: {
     type: String,
     required: true,
   },
@@ -17,6 +23,6 @@ const commentSchema = new mongoose.Schema({
   },
 });
 
-const Comment = mongoose.model('Comment', commentSchema);
+const Comment = mongoose.model("Comment", commentSchema);
 
 module.exports = Comment;

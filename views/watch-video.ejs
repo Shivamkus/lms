@@ -130,21 +130,10 @@
       <h3>add comments</h3>
       <textarea name="comment_box" placeholder="enter your comment" required maxlength="1000" cols="30" rows="10"></textarea>
       <input type="hidden" name="userName" value="<%=userName%>">
+      <input type="hidden" name="userEmail" value="<%=userEmail%>">
+
       <input type="submit" value="add comment" class="inline-btn" name="add_comment">
    </form>
-   <h1>All Comments</h1>
-
-   <% if (comments.length > 0) { %>
-     <ul>
-       <% comments.forEach(comment => { %>
-         <li>
-           <strong><%=comment.userName %></strong>  <%= comment.commentBox %>
-         </li>
-       <% }) %>
-     </ul>
-   <% } else { %>
-     <p>No comments available.</p>
-   <% } %>
  
 
    <h1 class="heading">user comments</h1>
@@ -157,8 +146,8 @@
          <div class="user">
             <img src="images/pic-1.jpg" alt="">
             <div>
-               <h3><%=comment.userName %></h3>
-               <span>22-10-2022</span>
+               <h3><%=comment.userName %>  <small><%=comment.userEmail %></small></h3>
+               <span><%= comment.createdAt %></span>
             </div>
          </div>
          <div class="comment-box"><%= comment.commentBox %></div>

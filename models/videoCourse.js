@@ -1,7 +1,19 @@
-// models/course.js
+// create a schema for the users
 const mongoose = require('mongoose');
 
 const videocourseSchema = new mongoose.Schema({
+  teacherName:{
+    type:String,
+    required :true
+  },
+   teacherEmail:{
+    type:String,
+    required :true
+  },
+   teacher_id:{
+    type:String,
+    required :true
+  },
   playlist:{
     type:String,
     required :true

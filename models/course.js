@@ -1,4 +1,4 @@
-// models/course.js
+// create a schema for the upload a course
 const mongoose = require('mongoose');
 
 const courseSchema = new mongoose.Schema({

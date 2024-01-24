@@ -125,10 +125,12 @@
             <video src="/uploads/videos/<%= videofile.fileName %>" controls poster="images/post-1-1.png" style="height: 200px;" width="350px" id="video" ></video>
          </a>
               <span><%= videofile.name %></span>
-               <button id="createFormButton">Add comment</button>
-               <div id="dynamicFormContainer" style="display: none;"></div>
            </div>
            <h3 class="title"><%= videofile.name %></h3>
+           <h3 class="title"><%= videofile.teacherName %></h3>
+           <h3 class="title"><%= videofile.teacherEmail %></h3>
+
+
            <a href="/playlist" class="inline-btn">view playlist</a>
         </div>
         <% }); %>

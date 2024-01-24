@@ -58,19 +58,6 @@
          </div>
       </div>
 
-<!--            
-      <div class="profile">
-         <img src="images/pic-1.jpg" class="image" alt="">
-         <h3 class="name">shaikh anas</h3>
-         <p class="role">studen</p>
-         <a href="/profile" class="btn">view profile</a>
-         <div class="flex-btn">
-            <a href="login" class="option-btn">login</a>
-            <a href="signup" class="option-btn">register</a>
-         </div>
-      </div>
-
-   </section> -->
 
 </header>   
 
@@ -140,6 +127,19 @@
 </li>
 
    <%}%>
+      </ul>
+      <%for (let i of list) {%>
+         <%if(i.present === true) {%>
+         <li>
+             <p></p>
+             <p><%=i.date%> <%=i.userName %> <%=i.userEmail %>  present</p>
+ 
+ 
+         <%} else{%>
+             <p><%=i.date%> %>absent</p>
+         <%}%>
+         </li>
+         <%}%>
       </ul>
 
       

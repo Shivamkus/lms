@@ -93,7 +93,7 @@
 
 
 
-<section class="form-container">
+<!-- <section class="form-container"> -->
     <!-- <form action="/addStudent" method="POST" >
         <h3>ADD Student</h3>
 
@@ -110,7 +110,7 @@
        <input type="submit" value="register new " name="submit" class="btn">
     </form> -->
  
- </section>
+ <!-- </section> -->
 
  <section class="form-container">
     <form action="/uploads" method="POST" enctype="multipart/form-data" >
@@ -137,6 +137,9 @@
       <p>ADD file <span>*</span></p> 
     <p>upload video file here <span>*</span></p>
     <input type="file" accept="video/*" name="videofile" required class="box">
+    <input type="hidden" name="teacherName" value="<%=teacherName %>">
+    <input type="hidden" name="teacherEmail" value="<%=teacherEmail %>">
+    <input type="hidden" name="teacher_id" value="<%=teacher_id %>">
 
       <input type="submit" value="ADD Courses" name="submit" class="btn">
    </form>
@@ -153,13 +156,34 @@
        <input type="text" name="name" placeholder="enter your name" required maxlength="50" class="box">
        <p>add test image/ pdf <span>*</span></p>
        <input type="file" name="test" required class="box">
+       
        <input type="submit" value="ADD Test" name="submit" class="btn">
     </form>
  
  </section>
 
- 
 
+ 
+ <section class="form-container">
+   <form action="/addmassages" method="POST">
+       <h3>ADD massages</h3>
+      <p>Type Massage here <span>*</span></p>
+      <input type="text" id="datepicker" name="addmassage" placeholder="enter massage" required maxlength="50" class="box">
+      <input type="hidden" name="teacherName" value="<%=teacherName %>">
+      <input type="hidden" name="teacherEmail" value="<%=teacherEmail %>">
+      <input type="submit" value="ADD massage" name="submit" class="btn">
+   </form>
+
+</section>
+
+ 
+<script>
+   flatpickr("#datepicker", {
+    enableTime: false, // If you want to include time, set this to true
+    dateFormat: "Y-m-d",
+    minDate: "today", // Disable past dates
+  });
+</script>
 
 
 
@@ -172,6 +196,11 @@
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+
+<!-- Add these scripts to your HTML file -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/l10n/default.js"></script>
 
    
 </body>
