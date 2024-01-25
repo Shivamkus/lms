@@ -44,6 +44,7 @@ router.post("/user_Update", homeController.updateuser);
 router.post("/addCourse", homeController.uploadFile);
 router.post('/markAttendance',homeController.makeAttendance);
 router.post('/addmassages',homeController.addmassages)
+router.post('/schedule',homeController.addSchedule)
 
 // here logout controller
 router.get("/logout", async function (req, res) {

@@ -2,3 +2,10 @@
 git push origin main
 
 this is a git hub update command
+
+git init
+git add README.md
+git commit -m "first commit"
+git branch -M main
+git remote add origin https://github.com/Shivamkus/LMS_S.git
+git push -u origin main

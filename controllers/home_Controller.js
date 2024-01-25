@@ -7,6 +7,38 @@ const VideoCourse = require("../models/videoCourse");
 const Comment = require("../models/comment");
 const Attendance = require('../models/attendance');
 const Massage = require('../models/Massage');
+const Schedule = require('../models/schedule');
+
+// create a post controller for the add schedule
+module.exports.addSchedule = async(req,res)=>{
+
+  try {
+    const { date, time, description } = req.body;
+
+    // Validate input (add more validation as needed)
+    if (!date || !time || !description) {
+      console.log({ error: 'Incomplete data provided' });
+      return res.redirect('/addCourse');
+    }
+
+    // Create a new schedule
+    const newSchedule = new Schedule({
+      date,
+      time,
+      description,
+    });
+
+    // Save the schedule to the database
+    await newSchedule.save();
+    console.log("time and schedule added");
+    return res.redirect('/addCourse')
+
+    // res.status(201).json({ message: 'Event scheduled successfully' });
+  } catch (error) {
+    console.error(error);
+    console.log({ error: 'Internal Server Error' });
+  }
+}
 
 
 module.exports.addmassages = async (req,res)=>{
@@ -136,6 +168,7 @@ module.exports.home = async function (req, res) {
     });
   }
 try {
+  const newSchedule = await Schedule.find({ });
   const newmassage = await Massage.find({ });
   return res.render("home", {
     title: "home || Page",
@@ -143,7 +176,8 @@ try {
     userName: user.name,
     userEmail : user.email,
     user_id : user.id,
-    Massage_list : newmassage
+    Massage_list : newmassage,
+    Schedule_list : newSchedule,
   });
 
   

@@ -176,6 +176,29 @@
 
 </section>
 
+<section class="form-container">
+   <div id="schedule-container">
+
+      <form id="schedule-form" action="/schedule" method="post">
+         <h3>ADD time and Schedule</h3>
+
+          <p for="event-date">Event Date:</p>
+          <input type="date" name="date" id="event-date" required class="box" style="color: #fff;">
+
+          <p for="event-time">Event Time:</p>
+          <input type="time" name="time" id="event-time" required class="box">
+
+          <p for="event-description">Event Description:</p>
+          <input type="text" name="description" id="event-description" required class="box">
+
+          <button type="submit" class="inline-btn">submit</button>
+
+          <!-- <button type="button" onclick="scheduleEvent()">Schedule Event</button> -->
+      </form>
+  </div>
+
+</section>
+
  
 <script>
    flatpickr("#datepicker", {

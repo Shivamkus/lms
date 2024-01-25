@@ -90,6 +90,19 @@
      <a href="/teachers/contact"><i class="fas fa-headset"></i><span>contact us</span></a>
   </nav>
 
+  <script>
+   const slider = document.getElementById('sidebar-slider');
+const sidebar = document.querySelector('.side-bar');
+
+slider.addEventListener('input', updateSidebarPosition);
+
+function updateSidebarPosition() {
+    const sliderValue = slider.value;
+    const translateYValue = -((sliderValue / 100) * sidebar.offsetHeight);
+    sidebar.style.transform = `translateY(${translateYValue}px)`;
+}
+
+  </script>
 </div> 
 
 <section class="home-grid">
