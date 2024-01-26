@@ -29,6 +29,8 @@ router.get("/register", homeController.Signup);
 router.get("/login", homeController.login);
 router.get("/courses", homeController.courses || homeController.getAllCourses);
 router.get("/course", homeController.dashbord);
+router.get("/video", homeController.dashbordvideo);
+
 router.get("/playlist", homeController.playlist);
 router.get("/teacher_profile", homeController.teachers_profile);
 router.get("/update", homeController.update);
@@ -54,6 +56,19 @@ router.get("/logout", async function (req, res) {
     }
     res.redirect("home");
   });
+});
+
+const VideoCourse = require('../models/videoCourse');
+router.get('/api', async (req, res) => {
+  try {
+    // Fetch all video courses from the database
+    const videoCourses = await VideoCourse.find();
+
+    res.status(200).json(videoCourses);
+  } catch (error) {
+    console.error(error);
+    res.status(500).json({ error: 'Internal Server Error' });
+  }
 });
 
 module.exports = router;

@@ -120,6 +120,36 @@ module.exports.dashbord = async function (req, res) {
   }
 };
 
+module.exports.dashbordvideo = async function (req, res) {
+  // const user = req.session.user;
+  // //   const isTeacherAuthenticated = Boolean(req.session.teacher);
+  // // check the user is login or not
+  // if (!user) {
+  //   return res.render("home", {
+  //     title: "home || Page",
+  //     isAuthenticated: false,
+  //   });
+  // }
+
+  try {
+    const course = await Course.find({}, { _id: 1, name: 1, fileName: 1 });
+    const videoCourse = await VideoCourse.find(
+      {},
+    //   { _id: 1, name: 1, fileName: 1 }
+    );
+    res.render("video_playlist", {
+      course,
+     videoCourse,
+      // isAuthenticated: true,
+      // userName: user.name,
+    });
+  } catch (error) {
+    console.error(error);
+    res.status(500).send("Internal Server Error");
+  }
+};
+
+
 // get a home page of first time teacher and studnts get this
 module.exports.home11 = function (req, res) {
   return res.render("home11");
@@ -168,6 +198,7 @@ module.exports.home = async function (req, res) {
     });
   }
 try {
+  const allTeachers = await Teacher.find({ });
   const newSchedule = await Schedule.find({ });
   const newmassage = await Massage.find({ });
   return res.render("home", {
@@ -178,6 +209,7 @@ try {
     user_id : user.id,
     Massage_list : newmassage,
     Schedule_list : newSchedule,
+    teacher_list : allTeachers,
   });
 
   
@@ -247,7 +279,6 @@ module.exports.about = function (req, res) {
   return res.render("about", {
     title: "about || Page",
     isAuthenticated: true,
-
     userName: user.name,
   });
 };
