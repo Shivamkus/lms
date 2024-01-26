@@ -29,12 +29,12 @@ router.get("/register", homeController.Signup);
 router.get("/login", homeController.login);
 router.get("/courses", homeController.courses || homeController.getAllCourses);
 router.get("/course", homeController.dashbord);
-router.get("/video", homeController.dashbordvideo);
+router.get("/watch-video", homeController.dashbordvideo);
 
 router.get("/playlist", homeController.playlist);
 router.get("/teacher_profile", homeController.teachers_profile);
 router.get("/update", homeController.update);
-router.get("/watch-video", homeController.watch_video);
+// router.get("/watch-video", homeController.watch_video);
 router.get("/addCourse", homeController.AddCourse);
 
 // here all post controllers of the user

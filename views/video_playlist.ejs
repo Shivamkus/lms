@@ -24,7 +24,7 @@ You can do whatever you want with the code. However if you love my content, you 
         */
         
         :root {
-            --primary : linear-gradient(to bottom right, #0a0057, #3f00ee);
+            --primary : linear-gradient(to bottom right, #3abfe0, #3f00ee);
             --secondary : gold;
             --text : #fff;
         }
@@ -36,18 +36,19 @@ You can do whatever you want with the code. However if you love my content, you 
         }
         
         body {
-            min-height: 100vh;
-            background-image: var(--primary);
+            /* min-height: 70vh; */
+            /* background-image: var(--primary); */
+            /* background:linear-gradient(135deg, #3abfe0, #3f00ee ); */
+            background-color: #3abfe0;
             font-family: sans-serif;
             color: var(--text);
         
-            display: flex;
-            align-items: center;
+            /* display: flex; */
+            /* align-items: center; */
         }
         
         .container {
-            width: 100vw;
-        
+            width: 80vw;
             display: grid;
             grid-template-columns: 1.8fr 1.2fr;
             gap: 1rem;
@@ -66,7 +67,13 @@ You can do whatever you want with the code. However if you love my content, you 
             width: 100%;
             height: 30rem;
         }
-        
+        .main-video {
+            height: 40rem;
+        }
+        .video-playlist {
+            background-color: #333;
+            margin-right: -20px;
+        }
         .main-video .title {
             margin-top: 1rem;
         }
@@ -78,10 +85,13 @@ You can do whatever you want with the code. However if you love my content, you 
         .video-playlist > p {
             padding: 1rem;
             color: var(--secondary);
+
         }
         
         .video-playlist .videos{
-            height: 70%;
+            margin-left: -20px;
+            background-color: #333;
+            height: 150%;
             overflow-y: auto;
         }
         
@@ -99,7 +109,7 @@ You can do whatever you want with the code. However if you love my content, you 
         .video-playlist .videos .video {
             position: relative;
             width: 100%;
-            height: 4rem;
+            height: 8rem;
         
             display: flex;
             justify-content: center;
@@ -152,7 +162,7 @@ You can do whatever you want with the code. However if you love my content, you 
             overflow: hidden;
             text-overflow: ellipsis;
         
-            font: 100 1rem sans-serif;
+            font: 500 1.4rem sans-serif;
             padding: 0 .5rem;
         }
         </style>
@@ -163,10 +173,7 @@ You can do whatever you want with the code. However if you love my content, you 
             <section class="main-video">
 
              <video src="/uploads/videos/" controls autoplay muted></video>
-             <% videoCourse.forEach(videofile => { %>
-                <!-- <h3 class="title"><%=videofile.name%></h3> -->
-
-             <%})%>
+             
 
          </section>
  
