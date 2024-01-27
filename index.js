@@ -126,26 +126,26 @@ app.post('/uploads1', uploadvideo.single('videofile'), async (req, res) => {
 
 
 
-const storagetest = multer.diskStorage({
-    destination : function(req , file, cb){
-        return cb(null, './assets/uploads/test');
-    },
-    filename : function(req,file, cb){
-        return cb(null, `${Date.now()}-${file.originalname}`);
-    }
-  });
+// const storagetest = multer.diskStorage({
+//     destination : function(req , file, cb){
+//         return cb(null, './assets/uploads/test');
+//     },
+//     filename : function(req,file, cb){
+//         return cb(null, `${Date.now()}-${file.originalname}`);
+//     }
+//   });
 
 
   
-//   const uploadtest = multer({storagetest});
-  const uploadtest = multer({ storage: storagetest });
+// //   const uploadtest = multer({storagetest});
+//   const uploadtest = multer({ storage: storagetest });
 
-app.post('/addTest',uploadtest.single('test') ,(req,res)=>{
-    console.log(req.body);
-    console.log(req.file);
-    console.log("test upload successfully");
-    return res.redirect('back');
-  });
+// app.post('/addTest',uploadtest.single('test') ,(req,res)=>{
+//     console.log(req.body);
+//     console.log(req.file);
+//     console.log("test upload successfully");
+//     return res.redirect('back');
+//   });
 
 
 

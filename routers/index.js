@@ -34,7 +34,7 @@ router.get("/watch-video", homeController.dashbordvideo);
 router.get("/playlist", homeController.playlist);
 router.get("/teacher_profile", homeController.teachers_profile);
 router.get("/update", homeController.update);
-// router.get("/watch-video", homeController.watch_video);
+router.get("/watch-videos", homeController.watch_video);
 router.get("/addCourse", homeController.AddCourse);
 
 // here all post controllers of the user
@@ -46,6 +46,8 @@ router.post("/user_Update", homeController.updateuser);
 router.post("/addCourse", homeController.uploadFile);
 router.post('/markAttendance',homeController.makeAttendance);
 router.post('/addmassages',homeController.addmassages)
+router.post('/addtest',homeController.addtest)
+
 router.post('/schedule',homeController.addSchedule)
 
 // here logout controller

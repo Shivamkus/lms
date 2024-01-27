@@ -8,6 +8,7 @@ const Comment = require("../models/comment");
 const Attendance = require('../models/attendance');
 const Massage = require('../models/Massage');
 const Schedule = require('../models/schedule');
+const Test = require('../models/test');
 
 // create a post controller for the add schedule
 module.exports.addSchedule = async(req,res)=>{
@@ -40,7 +41,7 @@ module.exports.addSchedule = async(req,res)=>{
   }
 }
 
-
+// post controller for the add massages by teacher
 module.exports.addmassages = async (req,res)=>{
   try {
     const newmassage = await Massage.create({
@@ -56,6 +57,22 @@ module.exports.addmassages = async (req,res)=>{
   }
 }
 
+module.exports.addtest = async (req,res)=>{
+  try {
+    const newTest = await Test.create({
+      link : req.body.link,
+      teacherName : req.body.teacherName,
+      teacherEmail : req.body.teacherEmail,
+      teacher_id : req.body.teacher_id,
+
+    });
+     console.log("massage created successfully", newTest);
+   return res.redirect('/addCourse'); // Redirect to a success page or back to the form
+  } catch (error) {
+    console.log("error in creating new massage",error);
+    res.status(500).send('Internal Server Error');
+  }
+}
 // controller for the make attendace
 module.exports.makeAttendance = async (req, res) => {
   try {
@@ -83,7 +100,7 @@ module.exports.addcomments = async (req, res) => {
 
     await newComment.save();
     console.log(req.body, "commented seccesfully");
-    res.redirect("/watch-video"); // Redirect to the home page or wherever you want
+    res.redirect("/playlist"); // Redirect to the home page or wherever you want
   } catch (error) {
     console.error(error);
     res.status(500).send("Internal Server Error");
@@ -93,26 +110,22 @@ module.exports.addcomments = async (req, res) => {
 // Fetch and render images on dashboard
 module.exports.dashbord = async function (req, res) {
   const user = req.session.user;
-  //   const isTeacherAuthenticated = Boolean(req.session.teacher);
-  // check the user is login or not
   if (!user) {
-    return res.render("home", {
-      title: "home || Page",
-      isAuthenticated: false,
-    });
+    return res.redirect("/login");
   }
+
 
   try {
     const course = await Course.find({}, { _id: 1, name: 1, fileName: 1 });
     const videoCourse = await VideoCourse.find(
-      {},
-    //   { _id: 1, name: 1, fileName: 1 }
-    );
+      {}    );
+     
     res.render("couseDashbord", {
       course,
       videoCourse,
       isAuthenticated: true,
       userName: user.name,
+      userEmail: user.email,
     });
   } catch (error) {
     console.error(error);
@@ -121,27 +134,26 @@ module.exports.dashbord = async function (req, res) {
 };
 
 module.exports.dashbordvideo = async function (req, res) {
-  // const user = req.session.user;
-  // //   const isTeacherAuthenticated = Boolean(req.session.teacher);
-  // // check the user is login or not
-  // if (!user) {
-  //   return res.render("home", {
-  //     title: "home || Page",
-  //     isAuthenticated: false,
-  //   });
-  // }
+  const user = req.session.user;
+  if (!user) {
+    return res.redirect("/login");
+  }
+
 
   try {
     const course = await Course.find({}, { _id: 1, name: 1, fileName: 1 });
-    const videoCourse = await VideoCourse.find(
-      {},
-    //   { _id: 1, name: 1, fileName: 1 }
-    );
+    const videoCourse = await VideoCourse.find({});
+    const comments = await Comment.find({},
+        "userName userEmail commentBox createdAt"
+      ).sort({ createdAt: -1 });
     res.render("video_playlist", {
       course,
      videoCourse,
-      // isAuthenticated: true,
-      // userName: user.name,
+     userName: user.name,
+     userEmail: user.email,
+     isAuthenticated: true,
+     comments,
+     
     });
   } catch (error) {
     console.error(error);
@@ -201,6 +213,7 @@ try {
   const allTeachers = await Teacher.find({ });
   const newSchedule = await Schedule.find({ });
   const newmassage = await Massage.find({ });
+  const newTest = await Test.find( { });
   return res.render("home", {
     title: "home || Page",
     isAuthenticated: true,
@@ -210,6 +223,7 @@ try {
     Massage_list : newmassage,
     Schedule_list : newSchedule,
     teacher_list : allTeachers,
+    test_list : newTest,
   });
 
   
@@ -428,9 +442,13 @@ module.exports.watch_video = async function (req, res) {
 
 // playlist controller
 
-module.exports.playlist = function (req, res) {
+module.exports.playlist =async function (req, res) {
   const user = req.session.user;
   const teacher = req.session.teacher;
+  const comments = await Comment.find(
+    {},
+    "userName userEmail commentBox createdAt"
+  ).sort({ createdAt: -1 });
 
   if (!user && !teacher) {
     return res.redirect("/login"); 
@@ -439,8 +457,10 @@ module.exports.playlist = function (req, res) {
     return res.render("playlist", {
       title: "Playlist Page",
       userName: user.name,
+      userEmail : user.email,
       isAuthenticated: true,
       role: "student",
+      comments
     });
   } else if (teacher) {
     const isTeacherAuthenticated = Boolean(req.session.teacher);

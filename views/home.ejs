@@ -16,14 +16,19 @@
 <body>
 
 <header class="header">
-   
+  <!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+
    <section class="flex">
 
       <a href="/" class="logo">Educa.</a>
 
-      <form action="search.html" method="post" class="search-form">
-         <input type="text" name="search_box" required placeholder="search courses..." maxlength="100">
-         <button type="submit" class="fas fa-search"></button>
+      <!-- <form action="search.html" method="post" class="search-form"> -->
+         <!-- <input type="text" name="search_box" required placeholder="search courses..." maxlength="100"> -->
+         <!-- <button type="submit" class="fas fa-search"></button> -->
       </form>
 
       <div class="icons">
@@ -49,10 +54,8 @@
                <a href="/logout" class="option-btn">logout</a>
            <% } else { %>
                <!-- If the user is not authenticated, display login and register buttons -->
-               <div class="flex-btn">
                    <a href="/login" class="option-btn">login</a>
                    <a href="/register" class="option-btn">register</a>
-               </div>
            <% } %>
 
          </div>
@@ -142,38 +145,38 @@
       <% if (isAuthenticated) { %>
       <div class="form-data box">
          <form action="/markAttendance" method="post">
-            <!-- <label for="date">Date:</label> -->
             <p style="font-size: 20px; color: #fff;">Date: <span style="color: red;">*</span></p>
-
             <input type="date" id="date" name="date" class="search-form" required>
-            
-            <!-- <label for="present" style="font-size: 18px; color: #fff;">Present:</label> -->
             <p style="font-size: 20px; color: #fff; margin-top: 10px;">Present: 
-          <input type="checkbox" id="present" name="present" value="true"></p>
+          <!-- <input type="checkbox" id="present" name="present" value="true"></p> -->
+          <input type="checkbox" id="present" name="present" value="true" onclick="showAlert()">
+
             <input type="hidden" name="userName" value="<%=userName%>">
             <input type="hidden" name="userEmail" value="<%=userEmail%>">
             <input type="hidden" name="user_id" value="<%=user_id%>"> 
-            <button type="submit" class="inline-btn">Mark Attendance</button>
+            <button type="submit" class="inline-btn" onclick="submitAttandance()">Mark Attendance</button>
           </form>
-
-
-          <!-- <div class="dynamic-checkbox" id="dynamicCheckbox">
-            <p style="font-size: 20px; color: #fff; margin-top: 10px;">Additional Checkbox: 
-              <input type="checkbox" id="additionalCheckbox" name="additionalCheckbox" value="true" checked></p>
-          </div>
-        
-          <div class="success-feedback" id="successFeedback">&#10003; Attendance Marked Successfully!</div>
-        </div> -->
       </div>
 
       
 
-
+      <button onclick="showMessage()" class="inline-btn">give the test</button>
+      <div id="overlay"></div>
+      <div id="messageModal">
+       <ul>
+          <%for(let i of test_list) {%>
+          <li>
+             <p><a href="<%=i.link%>" target="_blank"> click here</a> for the test <span> by <%=i.teacherName%> sir</span></p>
+          </li>   
+          <%}%>
+       </ul>
+    
+        <button onclick="hideMessage()" class="inline-option-btn">Close</button>
+      </div>
 
       
-  <button onclick="showMessage()" class="inline-btn">Show Message</button>
 
-  <!-- Modal -->
+  <button onclick="showMessage()" class="inline-btn">Show Message</button>
   <div id="overlay"></div>
   <div id="messageModal">
    <ul>
@@ -183,14 +186,13 @@
       </li>   
       <%}%>
    </ul>
-
     <button onclick="hideMessage()" class="inline-option-btn">Close</button>
   </div>
 
+
+
   <!-- create a time and schedule button -->
   <button onclick="showMessage1()" class="inline-btn">time and schedule</button>
-
-  <!-- Modal -->
   <div id="overlay1"></div>
   <div id="messageModal1">
    <ul>
@@ -206,12 +208,12 @@
   </div>
 
 
+<!-- chat box start -->
   <div class="box">
    <button onclick="showMessageChat()" class="inline-btn">chatbox</button>
   <div id="overlayChat"></div>
   <div id="messageModalChat">
    <div class="box">
-      
        <div class="chat-container">
          <div class="person-selector">
             <button class="button person-selector-button active-person" id="john-selector"><%=userName%></button>
@@ -251,21 +253,7 @@
    </div>
 
     <!--  style for the chat box -->
-     <style>
-      /* ------------------------------------------------------------------------------ */
-      /* body {
-  background-image: linear-gradient(
-    23deg,
-    hsl(49deg 100% 69%) 0%,
-    hsl(16deg 80% 61%) 2%,
-    hsl(330deg 81% 34%) 12%,
-    hsl(259deg 100% 15%) 50%,
-    hsl(212deg 100% 25%) 88%,
-    hsl(197deg 100% 30%) 98%,
-    hsl(183deg 79% 36%) 100%
-  );
-  height: 100vh;
-} */
+     <style>    
 
 .button {
   border: none;
@@ -535,42 +523,6 @@ clearChatBtn.addEventListener('click', () => {
   </div>
   </div>
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
   <script>
 
     function showMessage() {
@@ -620,13 +572,13 @@ clearChatBtn.addEventListener('click', () => {
       z-index: 1000;
     }
     
-    #messageModal span ,#messageModal span {
+    #messageModal span ,#messageModal1 span {
       color: #000;
       font-size: 15px;
       font-weight: 500;
     }
     /* Styles for the overlay */
-    #overlay,  #overlay {
+    #overlay,  #overlay1 {
       display: none;
       position: fixed;
       top: 0;
@@ -673,33 +625,18 @@ clearChatBtn.addEventListener('click', () => {
      // Add a class to highlight today's date
      dateInput.classList.add('today');
    });
+
+   function showAlert() {
+        // alert("Checkbox clicked!");
+    }
+
+    function submitAttandance() {
+      alert ("Attandance submitted")
+    }
+
+   
  </script>
 
- <!-- <script>
-   document.addEventListener('DOMContentLoaded', function() {
-     const attendanceForm = document.getElementById('attendanceForm');
-     const dateInput = document.getElementById('date');
-     const attendanceMessage = document.getElementById('attendanceMessage');
-
-     attendanceForm.addEventListener('submit', function(event) {
-       event.preventDefault();
-
-       const selectedDate = dateInput.value;
-       const today = new Date().toISOString().split('T')[0];
-
-       if (selectedDate === today) {
-         dateInput.classList.add('today');
-         attendanceMessage.innerHTML = '<p class="completed">Attendance completed for today!</p>';
-       } else {
-         // Reset the message if the selected date is not today
-         attendanceMessage.innerHTML = '';
-       }
-
-       // You can submit the form to the server here if needed
-       // For example, using AJAX or by allowing the default form submission
-     });
-   });
- </script> -->
 
 <section class="courses">
 

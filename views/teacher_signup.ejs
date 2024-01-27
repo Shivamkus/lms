@@ -82,7 +82,7 @@
       <p>your email <span>*</span></p>
       <input type="email" name="email" placeholder="enter your email" required maxlength="50" class="box">
       <p>your mobile No <span>*</span></p>
-      <input type="number" name="number" placeholder="enter your number" required maxlength="10" class="box">
+      <input type="number" name="number" placeholder="enter your number" required maxlength="10" class="box" oninput="validateNumberInput(this)">
       <p>your password <span>*</span></p>
       <input type="password" name="password" placeholder="enter your password" required maxlength="20" class="box">
       <p>confirm password <span>*</span></p>
@@ -93,14 +93,22 @@
    </form>
 
 </section>
-
 <script>
-   // Set the maximum value dynamically using JavaScript
-   var numberInput = document.getElementById('numberInput');
-   if (numberInput) {
-     numberInput.max = 10; // Set the maximum value
+   function validateNumberInput(input) {
+       // Get the maximum length from the "maxlength" attribute
+       const maxLength = parseInt(input.getAttribute('maxlength'));
+
+       // Check if the current input length exceeds the maximum length
+       if (input.value.length > maxLength) {
+           // Show an alert
+           alert("mobile number cannot more then " + maxLength + " number.");
+
+           // Trim the input value to the maximum allowed length
+           input.value = input.value.slice(0, maxLength);
+       }
    }
- </script>
+</script>
+
 
 
 

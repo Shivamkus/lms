@@ -148,14 +148,17 @@
 
 
  <section class="form-container">
-    <form action="/addTest" method="POST" enctype="multipart/form-data">
+    <form action="/addtest" method="POST" >
         <h3>ADD Test</h3>
 
        <!-- <h3>register now</h3> -->
        <p>Test name <span>*</span></p>
-       <input type="text" name="name" placeholder="enter your name" required maxlength="50" class="box">
-       <p>add test image/ pdf <span>*</span></p>
-       <input type="file" name="test" required class="box">
+       <input type="text" name="link" placeholder="upload link here" required maxlength="50" class="box">
+       <input type="hidden" name="teacherName" value="<%=teacherName %>">
+    <input type="hidden" name="teacherEmail" value="<%=teacherEmail %>">
+    <input type="hidden" name="teacher_id" value="<%=teacher_id %>">
+       <!-- <p>add test image/ pdf <span>*</span></p>
+       <input type="file" name="test" required class="box"> -->
        
        <input type="submit" value="ADD Test" name="submit" class="btn">
     </form>
