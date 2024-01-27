@@ -15,7 +15,7 @@
 </head>
 <body>
 
-<header class="header">
+<header class="header" >
    
    <section class="flex">
 
@@ -39,63 +39,44 @@
          <a href="#" class="btn">Select Your Role</a>
          <div class="flex-btn">
                     
-               <!-- If the user is authenticated, display logout button -->
-               <!-- If the user is not authenticated, display login and register buttons -->
                <div class="flex-btn">
                 <a href="/login" class="option-btn">Student</a>
                 <a href="/teachers/login" class="option-btn">Teachers</a>
                </div>
          </div>
       </div>
-
-
    </section>
-
 </header>   
 
-<div class="side-bar">
-
-    <div id="close-btn">
-       <i class="fas fa-times"></i>
-    </div>
- 
-    <div class="profile">
-       <img src="images/pic-1.jpg" class="image" alt="">
-       <h3 class="name"></h3>
-       <a href="#" class="btn">Select Your Role</a>
-    </div>
- 
-    <div class="flex-btn">
-        <a href="/login" class="option-btn">Student</a>
-        <a href="/teachers/login" class="option-btn">Teachers</a>
-    </div>
- 
+<div class="side-bar"> 
  </div>
-<section class="about">
+<section class="about" >
 
+   <h3 style="display: flex; justify-content: center; align-items: center; color: #fff; font-size: 30px; margin-bottom: 20px;" > Select Your Role for the.....?</h3>
 
 
    <div class="row">
 
-      <div class="image">
-         <img src="images/about-img.svg" alt="">
+      <a href="/teachers/login"> <div class="image" style="height: 500px; background:linear-gradient( 45deg,gray,rgb(15, 113, 107) ); display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 30px;">
+           <img src="images/about-img.svg" alt="" style="margin-top: -100px;"> 
+         <div class="flex-btn">
+            <a href="/teachers/login" class="btn" style="background-color: #f39c12;">Teachers</a>
+   
+         </div>
       </div>
+   </a>
 
-      <div class="content" style="height: 500px; background:linear-gradient( 45deg,gray,rgb(4, 47, 44) ); display: flex; justify-content: center; align-items: center; border-radius: 30px;" >
-         
-   <div class="profile">
-      <!-- <img src="images/pic-1.jpg" class="image" alt=""> -->
-         <h3 class="name"></h3>
-      <a href="#" class="btn">Select Your Role for the.....?</a>
-      <div class="flex-btn">
-         <a href="/teachers/login" class="btn" style="background-color: #f39c12;">Teachers</a>
+   <a href="/login">
+      <div class="image" style="height: 500px; background:linear-gradient( 45deg,gray,rgb(15, 113, 107) ); display: flex; flex-direction: column; justify-content: center; align-items: center; border-radius: 30px;">
+         <img src="images/student.png" alt="" style="height: 380px; width: 250px;" >
+         <div class="flex-btn">
+            <a href="/login" class="btn" style="background-color: #f39c12; margin-top: 20px;">Student</a>
+   
+         </div>
+      </div>
+   </a>
 
-      </div>
-            <div class="flex-btn">
-             <a href="/login" class="btn" style="background-color:#f39c12 ;">Student</a>
-            </div>
-      </div>
-   </div>
+     
       </div>
 
    </div>
@@ -262,11 +243,7 @@
 
 
 
-<footer class="footer">
 
-   <!-- &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved! -->
-
-</footer>
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>
