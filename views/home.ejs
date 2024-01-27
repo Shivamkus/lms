@@ -160,9 +160,9 @@
 
       
 
-      <button onclick="showMessage()" class="inline-btn">give the test</button>
-      <div id="overlay"></div>
-      <div id="messageModal">
+      <button onclick="showMessageTest()" class="inline-btn">give the test</button>
+      <div id="overlayTest"></div>
+      <div id="messageModalTest">
        <ul>
           <%for(let i of test_list) {%>
           <li>
@@ -171,7 +171,7 @@
           <%}%>
        </ul>
     
-        <button onclick="hideMessage()" class="inline-option-btn">Close</button>
+        <button onclick="hideMessageTest()" class="inline-option-btn">Close</button>
       </div>
 
       
@@ -524,6 +524,17 @@ clearChatBtn.addEventListener('click', () => {
   </div>
 
   <script>
+    function showMessageTest() {
+      // Display the modal and overlay
+      document.getElementById('messageModalTest').style.display = 'block';
+      document.getElementById('overlayTest').style.display = 'block';
+    }
+
+    function hideMessageTest() {
+      // Hide the modal and overlay
+      document.getElementById('messageModalTest').style.display = 'none';
+      document.getElementById('overlayTest').style.display = 'none';
+    }
 
     function showMessage() {
       // Display the modal and overlay
@@ -557,7 +568,7 @@ clearChatBtn.addEventListener('click', () => {
    </div>
    <style>
 
-#messageModal ,#messageModal1 {
+#messageModal ,#messageModal1, #messageModalTest {
       display: none;
       position: fixed;
       font-size: 18px;
@@ -572,13 +583,13 @@ clearChatBtn.addEventListener('click', () => {
       z-index: 1000;
     }
     
-    #messageModal span ,#messageModal1 span {
+    #messageModal span ,#messageModal1 span , #messageModalTest span {
       color: #000;
       font-size: 15px;
       font-weight: 500;
     }
     /* Styles for the overlay */
-    #overlay,  #overlay1 {
+    #overlay,  #overlay1 , #overlayTest {
       display: none;
       position: fixed;
       top: 0;
