@@ -9,6 +9,41 @@
     <title><%= title %></title>
 </head>
 <body>
+    <form action="/markAttendance" method="post" onsubmit="return submitAttendance()">
+        <p style="font-size: 20px; color: #fff;">Date: <span style="color: red;">*</span></p>
+        <!-- Set today's date as the default value -->
+        <input type="date" id="date" name="date" class="search-form" required readonly>
+        <p style="font-size: 20px; color: #fff; margin-top: 10px;">Present: 
+            <input type="checkbox" id="present" name="present" value="true">
+        </p>
+        <button type="submit" class="inline-btn">Mark Attendance</button>
+    </form>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get current date in "YYYY-MM-DD" format
+            const today = new Date().toISOString().split('T')[0];
+    
+            // Set the default value of the date input
+            const dateInput = document.getElementById('date');
+            dateInput.value = today;
+        });
+    
+        function submitAttendance() {
+            var presentCheckbox = document.getElementById("present");
+    
+            if (presentCheckbox.checked) {
+                // You can add additional logic here before submitting the form
+                // If you return false, the form submission will be canceled
+                alert("Attendance successfully submitted");
+                return true;
+            } else {
+                alert("Failed: Please check the checkbox");
+                return false;
+            }
+        }
+    </script>
+    
 
 <% if (isAuthenticated) { %>
 

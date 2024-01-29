@@ -133,9 +133,10 @@
       <%if(i.present === true) {%>
       <li style="list-style: none; color: #fff; font-size: 12px;">
           <h3 style="height: 20px; width: 150px; overflow: hidden;"><%=i.date%>  <span></span></h3> <h3> <%=i.userName %> <%=i.userEmail %>  <span style="color: green;">present ✅ </span></h3>
-
       <%} else{%>
-          <h3><%=i.date%> %> <span style="color: red;">absent ❌</span></h3>
+         <li style="list-style: none; color: #fff; font-size: 12px;">
+
+         <h3 style="height: 20px; width: 150px; overflow: hidden;"><%=i.date%>  <span></span></h3> <h3> <%=i.userName %> <%=i.userEmail %>  <span style="color: red;">absent ❌ </span></h3>
       <%}%>
       </li>
       <%}%>

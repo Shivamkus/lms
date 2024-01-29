@@ -143,21 +143,72 @@
       </div>
 
       <% if (isAuthenticated) { %>
-      <div class="form-data box">
-         <form action="/markAttendance" method="post">
-            <p style="font-size: 20px; color: #fff;">Date: <span style="color: red;">*</span></p>
-            <input type="date" id="date" name="date" class="search-form" required>
-            <p style="font-size: 20px; color: #fff; margin-top: 10px;">Present: 
-          <!-- <input type="checkbox" id="present" name="present" value="true"></p> -->
-          <input type="checkbox" id="present" name="present" value="true" onclick="showAlert()">
+        
 
-            <input type="hidden" name="userName" value="<%=userName%>">
-            <input type="hidden" name="userEmail" value="<%=userEmail%>">
-            <input type="hidden" name="user_id" value="<%=user_id%>"> 
-            <button type="submit" class="inline-btn" onclick="submitAttandance()">Mark Attendance</button>
-          </form>
-      </div>
 
+      <form action="/markAttendance" method="post" onsubmit="return submitAttendance()">
+        <p style="font-size: 20px; color: #fff;">Date: <span style="color: red;">*</span></p>
+        <!-- Set today's date as the default value -->
+        <input type="date" id="date" name="date" class="search-form" required readonly>
+        <p style="font-size: 20px; color: #fff; margin-top: 10px;">Present: 
+            <input type="checkbox" id="present" name="present" value="true">
+        </p>
+        <input type="hidden" name="userName" value="<%=userName%>">
+          <input type="hidden" name="userEmail" value="<%=userEmail%>">
+          <input type="hidden" name="user_id" value="<%=user_id%>"> 
+        <button type="submit" class="inline-btn">Mark Attendance</button>
+    </form>
+    
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            // Get current date in "YYYY-MM-DD" format
+            const today = new Date().toISOString().split('T')[0];
+    
+            // Set the default value of the date input
+            const dateInput = document.getElementById('date');
+            dateInput.value = today;
+        });
+    
+        function submitAttendance() {
+            var presentCheckbox = document.getElementById("present");
+    
+            if (presentCheckbox.checked) {
+                // You can add additional logic here before submitting the form
+                // If you return false, the form submission will be canceled
+                alert("Attendance successfully submitted");
+                return true;
+            } else {
+                alert("Failed: Please check the checkbox");
+                return false;
+            }
+        }
+    </script>
+      
+      <script>
+          // Set today's date in the date input field when the page loads
+          window.onload = function() {
+              var dateInput = document.getElementById("date");
+              var today = new Date().toISOString().split('T')[0];
+              dateInput.value = today;
+          };
+      
+          function submitAttendance() {
+              var presentCheckbox = document.getElementById("present");
+      
+              if (presentCheckbox.checked) {
+                  // You can add additional logic here before submitting the form
+                  // If you return false, the form submission will be canceled
+                  alert("Attendance successfully submitted");
+                  return true;
+              } else {
+                  alert("Failed: Please check the checkbox");
+                  return false;
+              }
+          }
+      </script>
+      
+
+         
       
 
       <button onclick="showMessageTest()" class="inline-btn">give the test</button>
@@ -253,7 +304,25 @@
    </div>
 
     <!--  style for the chat box -->
-     <style>    
+     <style>
+
+     @media (max-width:768px){
+      #messageModalChat  {
+      /* display: none; */
+      position: fixed;
+      font-size: 18px;
+      font-weight: 800;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #f4f0f0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+     }
+
 
 .button {
   border: none;
@@ -355,9 +424,9 @@
 }
 
 .chat-input-form {
-  display: flex;
+  display: grid;
   align-items: center;
-  margin-top: 2em;
+  margin-top: 1.5em;
   gap: 0.625em;
 }
 
@@ -374,13 +443,13 @@
 .send-button {
   background-color: #1c9bef;
   color: #fff;
-  font-size: 1em;
+  font-size: .8em;
   font-weight: bold;
 }
 
 .clear-chat-button {
   display: block;
-  margin-top: 20px ;
+  margin-top: 10px ;
   margin-left: 40%;
 }
 
@@ -393,8 +462,8 @@
       font-size: 18px;
       font-weight: 800;
       top: 50%;
-      left: 80%;
-      width: 40%;
+      left: 50%;
+      width: 100%;
       transform: translate(-50%, -50%);
       padding: 20px;
       background-color: #f4f0f0;
@@ -621,32 +690,29 @@ clearChatBtn.addEventListener('click', () => {
     </style>
 </section>
 <script>
-   document.addEventListener('DOMContentLoaded', function() {
-     // Get current date in "YYYY-MM-DD" format
-     const today = new Date().toISOString().split('T')[0];
+//    document.addEventListener('DOMContentLoaded', function() {
+//      // Get current date in "YYYY-MM-DD" format
+//      const today = new Date().toISOString().split('T')[0];
 
-     // Set the max and min attributes of the date input
-     const dateInput = document.getElementById('date');
-     dateInput.setAttribute('max', today);
-     dateInput.setAttribute('min', today);
+//      // Set the max and min attributes of the date input
+//      const dateInput = document.getElementById('date');
+//      dateInput.setAttribute('max', today);
+//      dateInput.setAttribute('min', today);
 
-     // Highlight today's date
-     dateInput.value = today;
+//      // Highlight today's date
+//      dateInput.value = today;
 
-     // Add a class to highlight today's date
-     dateInput.classList.add('today');
-   });
+//      // Add a class to highlight today's date
+//      dateInput.classList.add('today');
+//    });
 
-   function showAlert() {
-        // alert("Checkbox clicked!");
-    }
 
-    function submitAttandance() {
-      alert ("Attandance submitted")
-    }
+//     function submitAttandance() {
+//       alert ("Attandance submitted")
+//     }
 
    
- </script>
+//  </script>
 
 
 <section class="courses">
