@@ -39,7 +39,8 @@ You can do whatever you want with the code. However if you love my content, you 
             /* min-height: 70vh; */
             /* background-image: var(--primary); */
             /* background:linear-gradient(135deg, #3abfe0, #3f00ee ); */
-            background-color: #3abfe0;
+            /* background-color: #3abfe0; */
+            background-color: #333;
             font-family: sans-serif;
             color: var(--text);
         
@@ -66,13 +67,18 @@ You can do whatever you want with the code. However if you love my content, you 
         .main-video, .video-playlist {
             width: 100%;
             height: 30rem;
+            background-color: #6d6c6c;
         }
         .main-video {
             height: 40rem;
+            margin-bottom: 30px;
         }
         .video-playlist {
             background-color: #333;
+                        /* background-color: #6d6c6c; */
+
             margin-right: -20px;
+            margin-bottom: 30px;
         }
         .main-video .title {
             margin-top: 1rem;
@@ -93,6 +99,7 @@ You can do whatever you want with the code. However if you love my content, you 
             background-color: #333;
             height: 150%;
             overflow-y: auto;
+            border-bottom: 1px solid #fff;
         }
         
         .video-playlist .videos::-webkit-scrollbar {
@@ -171,65 +178,62 @@ You can do whatever you want with the code. However if you love my content, you 
  <body>
      <main class="container">
             <section class="main-video">
-
              <video src="/uploads/videos/" controls autoplay muted></video>
-             
-
          </section>
- 
          <section class="video-playlist">
-            
              <h3 class="title">Title of Video Playlist</h3>
              <p>10 lessions &nbsp; . &nbsp; 50m 48s</p>
              <div class="videos">
- 
              </div>
          </section>
 
-         <section class="comments" style="width: 100%;">
-   <form action="/addComments" method="post" class="add-comment" >
-      <h3>add comments</h3>
-      <textarea name="comment_box" placeholder="enter your comment" required maxlength="1000" cols="10" rows="10" style="height: 50px;"></textarea>
-      <input type="hidden" name="userName" value="<%=userName%>">
-      <input type="hidden" name="userEmail" value="<%=userEmail%>">
-      <input type="submit" value="add comment" class="inline-btn" name="add_comment">
-   </form>
-   <div class="box-container" style="margin-top: -30px;">
+         
+ <section class="comments" style="width: 100%; margin-top: 100px;">
+    <form action="/addComments" method="post" class="add-comment" >
+       <h3>add comments</h3>
+       <textarea name="comment_box" placeholder="enter your comment" required maxlength="1000" cols="10" rows="10" style="height: 50px;"></textarea>
+       <input type="hidden" name="userName" value="<%=userName%>">
+       <input type="hidden" name="userEmail" value="<%=userEmail%>">
+       <input type="submit" value="add comment" class="inline-btn" name="add_comment">
+    </form>
+    <div class="box-container" style="margin-top: -30px;">
+ 
+    <% if (comments.length > 0) { %>
+       <ul>
+       <% comments.forEach(comment => { %>
+       <li style="list-style: none;">
+       <div class="box">
+          <div class="user">
+             <img src="images/pic-1.jpg" alt="">
+             <div>
+                <h3><%=comment.userName %>  <small><%=comment.userEmail %></small></h3>
+                <p style="font-size: 18px; height: 20px; width: 150px; overflow: hidden;"><%= comment.createdAt %></p>
+             </div>
+          </div>
+          <div class="comment-box"><%= comment.commentBox %></div>
+       </li>
+       <% }) %>
+     </ul>
+     <% } else { %>
+       <p>No comments available.</p>
+     <% } %>
+          <!-- <form action="" class="flex-btn">
+             <input type="submit" value="edit comment" name="edit_comment" class="inline-option-btn">
+             <input type="submit" value="delete comment" name="delete_comment" class="inline-delete-btn">
+          </form> -->
+       </div>
+    </div>
+ </div>
+ 
+       
+       </div>
+ 
+    </div>
+ 
+ </section>
 
-   <% if (comments.length > 0) { %>
-      <ul>
-      <% comments.forEach(comment => { %>
-      <li style="list-style: none;">
-      <div class="box">
-         <div class="user">
-            <img src="images/pic-1.jpg" alt="">
-            <div>
-               <h3><%=comment.userName %>  <small><%=comment.userEmail %></small></h3>
-               <span><%= comment.createdAt %></span>
-            </div>
-         </div>
-         <div class="comment-box"><%= comment.commentBox %></div>
-      </li>
-      <% }) %>
-    </ul>
-    <% } else { %>
-      <p>No comments available.</p>
-    <% } %>
-         <!-- <form action="" class="flex-btn">
-            <input type="submit" value="edit comment" name="edit_comment" class="inline-option-btn">
-            <input type="submit" value="delete comment" name="delete_comment" class="inline-delete-btn">
-         </form> -->
-      </div>
-   </div>
-</div>
-
-      
-      </div>
-
-   </div>
-
-</section>
      </main>
+     
      <script>
 
 const main_video = document.querySelector('.main-video video');
