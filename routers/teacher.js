@@ -22,6 +22,7 @@ router.get("/login", teacherController.login);
 // post controller for the teachers
 router.post("/create-Teacher", teacherController.create);
 router.post("/Create-Teacher-Session", teacherController.createSession);
+// router.post('/chatmassagebyTeacher',teacherController.ChatTeacher);
 router.get("/logout", async function (req, res) {
   // Clear the user's session
   req.session.destroy(function (err) {

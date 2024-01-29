@@ -9,3 +9,27 @@ git commit -m "first commit"
 git branch -M main
 git remote add origin https://github.com/Shivamkus/LMS_S.git
 git push -u origin main
+
+
+
+              <%for (let i of chatmassages_list){%>
+                <li>
+                  <div class="message blue-bg">
+
+                  <div class="message-sender"><%=i.userName%></div>
+                  <div class="message-text"><%=i.chatmassages%></div>
+                  <!-- <div class="message-timestamp"></div> -->
+                </div>
+
+                </li>
+                <%}%>
+
+
+
+                
+                <%for(let i of teacher_list) {%>
+                  <li>
+                    <p><%=i.name%></p>
+                    <option value="<%=i.name%>"><%=i.name%></option>
+                  </li>
+                  <%}%>

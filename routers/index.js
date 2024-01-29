@@ -46,7 +46,10 @@ router.post("/user_Update", homeController.updateuser);
 router.post("/addCourse", homeController.uploadFile);
 router.post('/markAttendance',homeController.makeAttendance);
 router.post('/addmassages',homeController.addmassages)
-router.post('/addtest',homeController.addtest)
+router.post('/addtest',homeController.addtest);
+router.post('/chatmassage',homeController.chatmassages);
+router.post('/chatmassagebyTeacher',homeController.ChatTeacher);
+
 
 router.post('/schedule',homeController.addSchedule)
 

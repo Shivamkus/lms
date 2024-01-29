@@ -154,6 +154,363 @@ function updateSidebarPosition() {
 
 
 
+<!-- chat box start -->
+<div class="box">
+   <button onclick="showMessageChat()" class="inline-btn">chatbox</button>
+  <div id="overlayChat"></div>
+  <div id="messageModalChat">
+   <div class="box">
+       <div class="chat-container">
+         <div class="person-selector">
+            <button class="button person-selector-button active-person" id="john-selector" style="width: 40%"><%=teacherName%></button>
+            <!-- <button class="button person-selector-button" id="jane-selector">Jane</button> -->
+            <!-- <select name="button person-selector-button" id="teacher-selector" style="width: 40%;">
+              <ul>
+                 teacher list will be print here
+              </ul>
+            </select> -->
+          </div>
+         <h2 class="chat-header">John chatting...</h2>
+         <div class="chat-messages">
+            <ul>
+               <%for (let i of chatmassages_list){%>
+                 <li>
+                   <div class="message blue-bg">
+                   <div class="message-sender"><%=i.userName%> <span style="font-size: 10px;">Student</span> </div>
+                   <div class="message-text"><%=i.chatmassages%></div>
+                   <!-- <div class="message-timestamp"></div> -->
+                 </div>
+                 </li>
+                 <%}%>
+             </ul>
+             
+            <ul>
+               <%for(let i of chatteacher_list) {%>
+                  <div class="message gray-bg">
+                  <li>
+                     <div class="message-sender"><%=i.teacherName%>  <span style="font-size: 10px;">teacher</span></div>
+                     <div class="message-text"><%=i.chatteacher%></div>
+
+                  </li>
+               </div>
+
+                  <%}%>
+            </ul>
+             <!-- <div class="message-timestamp">10:35 AM</div> -->
+         </div>
+         <form action="/chatmassagebyTeacher" method="post" class="chat-input-form" >
+           <input type="text"   name="chatteacher" class="chat-input" required placeholder="Type here, <%=teacherName%>..." />
+           <input type="hidden" name="teacherName" value="<%=teacherName%>">
+          <input type="hidden" name="teacherEmail" value="<%=teacherEmail%>">
+          <input type="hidden" name="teacher_id" value="<%=teacher_id%>"> 
+           <button type="submit" class="button send-button">Send</button>
+         </form>
+         <button class="button clear-chat-button">Clear Chat</button>
+         <button onclick="hideMessageChat()" class="inline-option-btn">Close</button>
+
+       </div>
+   </div>
+
+    <!--  style for the chat box -->
+     <style>
+
+.button {
+  border: none;
+  padding: 0.625em;
+  border-radius: 0.5em;
+  cursor: pointer;
+}
+
+.button:hover {
+  filter: brightness(0.9);
+}
+
+.button:active {
+  transform: translateY(2px);
+}
+
+.person-selector {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  margin: 1em auto 1em;
+  max-width: 40em;
+}
+
+.person-selector-button {
+  width: 15%;
+  background-color: #39e64542;
+  color: #fff;
+  font-size: 1.1em;
+}
+
+.active-person {
+  background: #08529d;
+  box-shadow: 0 0 0.5em 0.1em #c3c3c333;
+}
+
+.chat-container {
+  background: #15202b;
+  font-family: 'Roboto', sans-serif;
+  border-radius: 0.5em;
+  padding: 0.5em 1.25em;
+  margin: auto;
+  max-width: 37.5em;
+  height: 37.5em;
+  /* height: 50%; */
+  box-shadow: 0 0 1.25em 0.5em #c3c3c333;
+}
+
+.chat-header {
+  margin-bottom: 1em;
+  color: #fff;
+}
+
+.chat-header h2 {
+  font-size: 1.25em;
+  font-weight: bold;
+}
+
+.chat-messages {
+  height: 17em;
+  overflow-y: scroll;
+}
+
+.chat-messages::-webkit-scrollbar {
+  display: none;
+}
+
+.message {
+  padding: 0.5em;
+  border-radius: 1em;
+  margin-bottom: 0.625em;
+  display: flex;
+  flex-direction: column;
+  color: #fff;
+}
+
+.message-sender {
+  font-weight: bold;
+  margin-bottom: 0.31em;
+}
+
+.message-text {
+  font-size: 1em;
+  margin-bottom: 0.31em;
+  word-wrap: break-word;
+}
+
+.message-timestamp {
+  font-size: 0.75em;
+  text-align: right;
+}
+
+.blue-bg {
+  background-color: #1c9bef;
+}
+
+.gray-bg {
+  background-color: #3d5365;
+}
+
+.chat-input-form {
+  display: grid;
+  align-items: center;
+  margin-top: 1.5em;
+  gap: 0.625em;
+}
+
+.chat-input {
+  padding: 0.625em;
+  border: none;
+  border-radius: 0.5em;
+  background-color: #f5f5f5;
+  color: #333;
+  font-size: 1em;
+  flex-grow: 1;
+}
+
+.send-button {
+  background-color: #1c9bef;
+  color: #fff;
+  font-size: .8em;
+  font-weight: bold;
+}
+
+.clear-chat-button {
+  display: block;
+  margin-top: 10px ;
+  margin-left: 40%;
+}
+
+      /* ------------------------------------------------------------------------------ */
+
+
+#messageModalChat  {
+      display: none;
+      position: fixed;
+      font-size: 18px;
+      font-weight: 800;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      transform: translate(-50%, -50%);
+      padding: 20px;
+      background-color: #f4f0f0;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+      z-index: 1000;
+    }
+    
+    #messageModalChat span  {
+      color: #000;
+      font-size: 15px;
+      font-weight: 500;
+    }
+    /* Styles for the overlay */
+    #overlayChat {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.5);
+      z-index: 999;
+    }
+     </style>
+
+
+
+
+<!-- script for the chatbx -->
+     <script>
+ function showMessageChat() {
+      // Display the modal and overlay
+      document.getElementById('messageModalChat').style.display = 'block';
+      document.getElementById('overlayChat').style.display = 'block';
+    }
+
+    function hideMessageChat() {
+      // Hide the modal and overlay
+      document.getElementById('messageModalChat').style.display = 'none';
+      document.getElementById('overlayChat').style.display = 'none';
+    }
+
+
+   //  --------------------------------------------------------------------------------------------
+   // @ts-nocheck
+
+const johnSelectorBtn = document.querySelector('#john-selector')
+const janeSelectorBtn = document.querySelector('#jane-selector')
+const chatHeader = document.querySelector('.chat-header')
+const chatMessages = document.querySelector('.chat-messages')
+const chatInputForm = document.querySelector('.chat-input-form')
+const chatInput = document.querySelector('.chat-input')
+const clearChatBtn = document.querySelector('.clear-chat-button')
+
+const messages = JSON.parse(localStorage.getItem('messages')) || []
+
+// const createChatMessageElement = (message) => `
+//   <div class="message ${message.sender === 'John' ? 'blue-bg' : 'gray-bg'}">
+//     <div class="message-sender">${message.sender}</div>
+//     <div class="message-text">${message.text}</div>
+//     <div class="message-timestamp">${message.timestamp}</div>
+//   </div>
+// `
+
+window.onload = () => {
+  messages.forEach((message) => {
+    chatMessages.innerHTML += createChatMessageElement(message)
+  })
+}
+
+let messageSender = 'John'
+
+const updateMessageSender = (name) => {
+  messageSender = name
+  chatHeader.innerText = `${messageSender} chatting...`
+  chatInput.placeholder = `Type here, ${messageSender}...`
+
+  if (name === 'John') {
+    johnSelectorBtn.classList.add('active-person')
+    janeSelectorBtn.classList.remove('active-person')
+  }
+  if (name === 'Jane') {
+    janeSelectorBtn.classList.add('active-person')
+    johnSelectorBtn.classList.remove('active-person')
+  }
+
+  /* auto-focus the input field */
+  chatInput.focus()
+}
+
+johnSelectorBtn.onclick = () => updateMessageSender('John')
+janeSelectorBtn.onclick = () => updateMessageSender('Jane')
+
+const sendMessage = (e) => {
+  e.preventDefault()
+
+  const timestamp = new Date().toLocaleString('en-US', { hour: 'numeric', minute: 'numeric', hour12: true })
+  const message = {
+    sender: messageSender,
+    text: chatInput.value,
+    timestamp,
+  }
+
+  /* Save message to local storage */
+  messages.push(message)
+  localStorage.setItem('messages', JSON.stringify(messages))
+
+  /* Add message to DOM */
+  chatMessages.innerHTML += createChatMessageElement(message)
+
+  /* Clear input field */
+  chatInputForm.reset()
+
+  /*  Scroll to bottom of chat messages */
+  chatMessages.scrollTop = chatMessages.scrollHeight
+}
+
+chatInputForm.addEventListener('submit', sendMessage)
+
+clearChatBtn.addEventListener('click', () => {
+  localStorage.clear()
+  chatMessages.innerHTML = ''
+})
+//----------------------------------------------------------------------------------------------------------------
+     </script>
+
+
+  </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 <section class="courses">
 
    <h1 class="heading">our courses</h1>
@@ -278,11 +635,6 @@ function updateSidebarPosition() {
 
 
 
-<footer class="footer">
-
-   <!-- &copy; copyright @ 2022 by <span>mr. web designer</span> | all rights reserved! -->
-
-</footer>
 
 <!-- custom js file link  -->
 <script src="js/script.js"></script>

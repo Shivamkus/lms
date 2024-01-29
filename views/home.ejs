@@ -145,7 +145,7 @@
       <% if (isAuthenticated) { %>
         
 
-
+<div class="form-contarer box">
       <form action="/markAttendance" method="post" onsubmit="return submitAttendance()">
         <p style="font-size: 20px; color: #fff;">Date: <span style="color: red;">*</span></p>
         <!-- Set today's date as the default value -->
@@ -158,7 +158,7 @@
           <input type="hidden" name="user_id" value="<%=user_id%>"> 
         <button type="submit" class="inline-btn">Mark Attendance</button>
     </form>
-    
+  </div>
     <script>
         document.addEventListener('DOMContentLoaded', function() {
             // Get current date in "YYYY-MM-DD" format
@@ -267,7 +267,7 @@
    <div class="box">
        <div class="chat-container">
          <div class="person-selector">
-            <button class="button person-selector-button active-person" id="john-selector"  style="width: 30%;"><%=userName%></button>
+            <button class="button person-selector-button active-person" id="john-selector" ><%=userName%></button>
             <!-- <button class="button person-selector-button" id="jane-selector">Jane</button> -->
             <select name="button person-selector-button" id="teacher-selector" style="width: 40%;">
               <ul>
@@ -282,19 +282,45 @@
           </div>
          <h2 class="chat-header">John chatting...</h2>
          <div class="chat-messages">
-           <div class="message blue-bg">
-             <div class="message-sender">John</div>
-             <div class="message-text">Hey Jane, what's up?</div>
-             <div class="message-timestamp">10:30 AM</div>
+            <ul>
+              <%for (let i of chatmassages_list){%>
+                <li>
+                  <div class="message blue-bg">
+                  <div class="message-sender"><%=i.userName%> <span style="font-size: 10px;">Student</span> </div>
+                  <div class="message-text"><%=i.chatmassages%></div>
+                  <!-- <div class="message-timestamp"></div> -->
+                </div>
+                </li>
+                <%}%>
+            </ul>
+             
+
+            <%for(let i of chatteacher_list) {%>
+              <div class="message gray-bg">
+
+              <li>
+
+                 <div class="message-sender"><%=i.teacherName%></div>
+                 <div class="message-text"><%=i.chatteacher%></div>
+
+              </li>
            </div>
-           <div class="message gray-bg">
+
+              <%}%>
+        </ul>
+         <!-- <div class="message-timestamp">10:35 AM</div> -->
+     </div>
+           <!-- <div class="message gray-bg">
              <div class="message-sender">Jane</div>
              <div class="message-text">Not much, just living the dream. How about you?</div>
              <div class="message-timestamp">10:35 AM</div>
-           </div>
-         </div>
-         <form class="chat-input-form">
-           <input type="text" class="chat-input" required placeholder="Type here, John..." />
+           </div> -->
+         <!-- </div> -->
+         <form action="/chatmassage" method="post" class="chat-input-form" >
+           <input type="text"   name="chatmassages" class="chat-input" required placeholder="Type here, <%=userName%>..." />
+           <input type="hidden" name="userName" value="<%=userName%>">
+          <input type="hidden" name="userEmail" value="<%=userEmail%>">
+          <input type="hidden" name="user_id" value="<%=user_id%>"> 
            <button type="submit" class="button send-button">Send</button>
          </form>
          <button class="button clear-chat-button">Clear Chat</button>
@@ -305,24 +331,6 @@
 
     <!--  style for the chat box -->
      <style>
-
-     @media (max-width:768px){
-      #messageModalChat  {
-      /* display: none; */
-      position: fixed;
-      font-size: 18px;
-      font-weight: 800;
-      top: 50%;
-      left: 50%;
-      width: 100%;
-      transform: translate(-50%, -50%);
-      padding: 20px;
-      background-color: #f4f0f0;
-      box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
-      z-index: 1000;
-    }
-     }
-
 
 .button {
   border: none;
@@ -487,9 +495,11 @@
       background-color: rgba(0, 0, 0, 0.5);
       z-index: 999;
     }
-
-       
      </style>
+
+
+
+
 <!-- script for the chatbx -->
      <script>
  function showMessageChat() {

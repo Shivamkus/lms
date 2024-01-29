@@ -4,6 +4,22 @@ const User = require("../models/user");
 const videoCourse = require("../models/videoCourse");
 const Attendance = require('../models/attendance');
 const Massage = require('../models/Massage');
+const ChatTeacher = require('../models/chatTeacher');
+const  Chatmassage  = require("../models/chatMassage");
+
+
+// // post controller for the chat massages
+// module.exports.ChatTeacher = async(req,res)=>{
+//   try {
+//     const { chatteacher, teacherName, teacherEmail , teacher_id} = req.body;
+//     await ChatTeacher.create({ chatteacher, teacherName, teacherEmail , teacher_id});
+//     console.log('chat massage successfully send',);
+//     res.redirect('/teachers/home')
+//   } catch (error) {
+//     console.log("error on creating chat massages",error);
+//     res.status(500).send('Internal Server Error');
+//   }
+//   };
 
 
 
@@ -111,8 +127,11 @@ module.exports.teachers_profile = function (req, res) {
 };
 
 // teachers home page contoller after login 
-module.exports.homeT = function (req, res) {
+module.exports.homeT = async function (req, res) {
   const teacher = req.session.teacher;
+  const teacherss = await Teacher.find({});
+  const Chatteachers = await ChatTeacher.find({ });
+  const chatmassages_list = await Chatmassage.find({ });
   if (!teacher) {
     return res.redirect("/teachers/homepage");
   }
@@ -122,6 +141,11 @@ module.exports.homeT = function (req, res) {
     title: "teachers home page",
     isTeacherAuthenticated: isTeacherAuthenticated,
     teacherName: teacher.name,
+    teacherEmail: teacher.email,
+    teacher_id : teacher.id,
+    teachers_lists : teacherss,
+    chatteacher_list : Chatteachers,
+    chatmassages_list,
   });
 };
 

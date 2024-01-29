@@ -9,6 +9,23 @@ const Attendance = require('../models/attendance');
 const Massage = require('../models/Massage');
 const Schedule = require('../models/schedule');
 const Test = require('../models/test');
+const Chatmassage = require('../models/chatMassage');
+const ChatTeacher = require('../models/chatTeacher');
+
+
+
+// post controller for the chat massages
+module.exports.ChatTeacher = async(req,res)=>{
+  try {
+    const { chatteacher, teacherName, teacherEmail , teacher_id} = req.body;
+    await ChatTeacher.create({ chatteacher, teacherName, teacherEmail , teacher_id});
+    console.log('chat massage successfully send',);
+    res.redirect('/teachers/home')
+  } catch (error) {
+    console.log("error on creating chat massages",error);
+    res.status(500).send('Internal Server Error');
+  }
+  };
 
 // create a post controller for the add schedule
 module.exports.addSchedule = async(req,res)=>{
@@ -86,6 +103,20 @@ module.exports.makeAttendance = async (req, res) => {
     res.status(500).send('Internal Server Error');
   }
 };
+// post controller for the chat massages
+module.exports.chatmassages = async(req,res)=>{
+try {
+  const { chatmassages, userName, userEmail , user_id} = req.body;
+  await Chatmassage.create({chatmassages, userName, userEmail , user_id});
+  console.log('chat massage successfully send',);
+  res.redirect('/home')
+} catch (error) {
+  console.log("error on creating chat massages",error);
+  res.status(500).send('Internal Server Error');
+
+}
+};
+
 
 // controller for the post addcomments
 module.exports.addcomments = async (req, res) => {
@@ -214,6 +245,9 @@ try {
   const newSchedule = await Schedule.find({ });
   const newmassage = await Massage.find({ });
   const newTest = await Test.find( { });
+  const chatmassages = await Chatmassage.find( { });
+  const chatteacher_list = await ChatTeacher.find({ });
+  
   return res.render("home", {
     title: "home || Page",
     isAuthenticated: true,
@@ -224,6 +258,8 @@ try {
     Schedule_list : newSchedule,
     teacher_list : allTeachers,
     test_list : newTest,
+    chatmassages_list : chatmassages,
+    chatteacher_list,
   });
 
   
@@ -416,7 +452,7 @@ module.exports.courses = function (req, res) {
     isAuthenticated: true,
   });
 };
-
+// contoller for the watch video
 module.exports.watch_video = async function (req, res) {
   const user = req.session.user;
   if (!user) {
